@@ -1,11 +1,13 @@
 import { Client, Databases, ID, Query, Storage } from "appwrite";
+import { AppwriteConfig } from "./constants";
 
-const data_id = import.meta.VITE_APP_APPWRITE_DATABASE_ID;
-const collection_id = import.meta.VITE_APP_APPWRITE_COLLECTION_ID;
-const endpoint = import.meta.VITE_APP_APPWRITE_URL;
-const project_id = import.meta.VITE_APP_APPWRITE_PROJECT_ID
-const bucket_id = import.meta.VITE_APP_APPWRITE_BUCKET_ID
+// const data_id = import.meta.VITE_APP_APPWRITE_DATABASE_ID;
+// const collection_id = import.meta.VITE_APP_APPWRITE_COLLECTION_ID;
+// const endpoint = import.meta.VITE_APP_APPWRITE_URL;
+// const project_id = import.meta.VITE_APP_APPWRITE_PROJECT_ID
+// const bucket_id = import.meta.VITE_APP_APPWRITE_BUCKET_ID
 
+const { data_id, collection_id, endpoint, project_id, bucket_id } = AppwriteConfig
 export class Service {
     client = new Client();
     databases;
@@ -90,6 +92,6 @@ export class Service {
 
 const service = new Service()
 
-export service
+export default service;
 
 
