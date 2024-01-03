@@ -6,11 +6,14 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from "./App.jsx";
-import AuthLayout from "./components/authLayout/AuthLayout.jsx";
+import Protected from "./components/authLayout/AuthLayout.jsx";
 import "./index.css";
-import AllPosts from "./pages/allPost/AllPost.jsx";
+import AddPost from "./pages/addPost/AddPost.jsx";
+import AllPost from "./pages/allPost/AllPost.jsx";
+import EditPost from "./pages/editPost/EditPost.jsx";
 import Home from "./pages/home/Home.jsx";
 import Login from "./pages/login/Login.jsx";
+import Post from "./pages/post/Post.jsx";
 import Signup from "./pages/signup/Signup";
 import store from "./store/store.js";
 
@@ -26,25 +29,49 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: (
-          <AuthLayout authentication={false}>
+          <Protected authentication={false}>
             <Login />
-          </AuthLayout>
+          </Protected>
         ),
       },
       {
         path: "/signup",
         element: (
-          <AuthLayout authentication={false}>
+          <Protected authentication={false}>
             <Signup />
-          </AuthLayout>
+          </Protected>
         ),
       },
       {
         path: "/all-posts",
         element: (
-          <AuthLayout authentication>
-            <AllPosts />
-          </AuthLayout>
+          <Protected authentication>
+            <AllPost />
+          </Protected>
+        ),
+      },
+      {
+        path: "/add-post",
+        element: (
+          <Protected authentication>
+            <AddPost />
+          </Protected>
+        ),
+      },
+      {
+        path: "/edit-post/:id",
+        element: (
+          <Protected authentication>
+            <EditPost />
+          </Protected>
+        ),
+      },
+      {
+        path: "/post/:id",
+        element: (
+          <Protected authentication>
+            <Post />
+          </Protected>
         ),
       },
     ],
