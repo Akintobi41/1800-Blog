@@ -25,4 +25,4 @@ function Protected({ children, authentication = true }) {
 
 export default Protected;
 
-// Consider erros for cases in which navigate fails
+// Consider errors for cases in which navigate fails
