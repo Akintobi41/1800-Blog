@@ -29,9 +29,6 @@ function Signup() {
     }
   };
 
-  // and it was called userData and the create Account method was used
-  // also we tried to get the current user and then it was dispatched to the store (Redux Store) and then we navigated the user back to the homepage
-
   return (
     <div className="flex items-center justify-center">
       <div
