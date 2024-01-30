@@ -1,13 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import appwriteService from "../../appwrite/config";
 import Button from "../button/Button";
 import Input from "../input/Input";
 import RTE from "../rte/RTE";
 import Select from "../select/Select";
-import appwriteService from "../../appwrite/config";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 function PostForm({ post }) {
   // postForm will be accepting a post
@@ -26,6 +26,35 @@ function PostForm({ post }) {
 
   const submit = async (data) => {
     console.log(data);
+    if (post) {
+      const file = data.image[0]
+        ? appwriteService.uploadFile(data.image[0])
+        : null;
+
+      if (file) {
+        appwriteService.deleteFile(post.featuredImage);
+      }
+      const dbPost = appwriteService.updatePost(post.$id, {
+        ...data,
+        featuredImage: file ? file.$id : undefined,
+      });
+      if (dbPost) {
+        navigate(`/post/${dbPost.$id}`);
+      }
+    } else {
+      const file = await appwriteService.uploadFile(data.image[0]);
+      if (file) {
+        const fileId = file.$id;
+        data.featuredImage = fileId;
+        const dbPost = await appwriteService.createPost({
+          ...data,
+          userId: userData.$id,
+        });
+        if (dbPost) {
+          navigate(`/post/${dbPost.$id}`);
+        }
+      }
+    }
   };
 
   const slugTransform = useCallback((value) => {
