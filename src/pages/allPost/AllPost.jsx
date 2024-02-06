@@ -5,11 +5,10 @@ import PostCard from "./../../components/postCard/PostCard";
 
 function AllPost() {
   const [posts, setPosts] = useState(null);
-  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     appwriteService.getPosts([]).then((newPosts) => {
-      if (posts) {
+      if (newPosts) {
         setPosts(newPosts.documents);
       }
     });
@@ -19,13 +18,15 @@ function AllPost() {
     <div className="w-full py-8">
       <Container>
         <div className="flex flex-wrap">
-          {posts.length
-            ? posts.map((post) => (
-                <div className="p-2 w-1/4" key={post.$id}>
-                  <PostCard {...post} />
-                </div>
-              ))
-            : null}
+          {posts.length ? (
+            posts.map((post) => (
+              <div className="p-2 w-1/4" key={post.$id}>
+                <PostCard {...post} />
+              </div>
+            ))
+          ) : (
+            <h1> Login to read posts</h1>
+          )}
         </div>
       </Container>
     </div>
