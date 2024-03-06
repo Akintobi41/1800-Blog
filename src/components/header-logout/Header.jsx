@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import LogoutBtn from "./LogoutBtn";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status); // Check if the user is logged or not
@@ -31,14 +32,17 @@ function Header() {
       active: authStatus,
     },
     {
-      name: "Add Posts",
-      slug: "/add-posts", // if user is logged in show add-posts section
+      name: "Add Post",
+      slug: "/add-post", // if user is logged in show add-post section
       active: authStatus,
     },
   ];
 
+  console.log(authStatus);
+  //Learn how to use hex codes in tailwind CSS
+
   return (
-    <header className="py-3 shadow bg-gray-500">
+    <header className=" flex items-center p-6 shadow bg-[#C4C1A4]">
       <Container>
         <nav className="flex">
           <div className="mr-4">
@@ -47,16 +51,20 @@ function Header() {
           <ul className="flex ml-auto">
             {navItems.map((item) =>
               item.active ? ( //logic for displaying the sections based on if the user is logged in or not
-                <li key={item.name}>
-                  <button
-                    onClick={() => navigate(item.slug)}
-                    className="inline-block px-6 py-2 duration-200 hover:bg-blue-100 rounded-full"
-                  >
-                    {item.name}
-                  </button>
-                </li>
+                <>
+                  <li key={item.name} className="hidden sm:block">
+                    <button
+                      onClick={() => navigate(item.slug)}
+                      className="inline-block px-6 py-2 duration-200 hover:bg-[#9E9FA5] rounded-full"
+                    >
+                      {item.name}
+                    </button>
+                  </li>
+                </>
               ) : null,
             )}
+            <HamburgerMenu />
+
             {authStatus && <LogoutBtn />}
           </ul>
         </nav>

@@ -1,18 +1,39 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login, logout } from "./store/authSlice";
+import Header from "./components/header-logout/Header";
+import Footer from "./components/footer/Footer";
+import authService from "./appwrite/auth";
+import Logo from "./components/logo/Logo";
 
 function App() {
-  console.log('boy')
-  return (
-    <div className="min-h-screen flex flex-wrap content-between ">
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    authService
+      .getCurrentUser()
+      .then((userData) => {
+        if (userData) dispatch(login({ userData }));
+        else dispatch(logout());
+      })
+      .finally(() => setLoading(false));
+  }, [dispatch]);
+
+  return !loading ? (
+    <div className="min-h-screen flex flex-wrap content-between bg-[#fff6dc]">
       <div className="w-full block">
-        {" "}
-        <main>
+        <Header />
+        <main className="p-6 bg-[#fff6dc]">
           <Outlet />
         </main>
       </div>
+      <div className="w-full block">
+        <Footer />
+      </div>
     </div>
-  );
+  ) : null;
 }
 
 export default App;

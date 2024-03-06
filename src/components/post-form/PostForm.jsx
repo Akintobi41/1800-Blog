@@ -8,8 +8,10 @@ import Button from "../button/Button";
 import Input from "../input/Input";
 import RTE from "../rte/RTE";
 import Select from "../select/Select";
+// import authService from "../../appwrite/auth";
 
 function PostForm({ post }) {
+  console.log(post, "post");
   // postForm will be accepting a post
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
@@ -26,24 +28,31 @@ function PostForm({ post }) {
 
   const submit = async (data) => {
     console.log(data);
+    console.log(post);
+
     if (post) {
       const file = data.image[0]
-        ? appwriteService.uploadFile(data.image[0])
+        ? await appwriteService.uploadFile(data.image[0])
         : null;
 
       if (file) {
         appwriteService.deleteFile(post.featuredImage);
       }
-      const dbPost = appwriteService.updatePost(post.$id, {
+      const dbPost = await appwriteService.updatePost(post.$id, {
         ...data,
-        featuredImage: file ? file.$id : undefined,
+        featuredImage: file ? file.$slug : undefined,
       });
       if (dbPost) {
-        navigate(`/post/${dbPost.$id}`);
+        navigate(`/post/${dbPost.$slug}`);
       }
     } else {
+      console.log("no post ");
       const file = await appwriteService.uploadFile(data.image[0]);
+      console.log(file);
+
       if (file) {
+        console.log(data);
+        console.log(file);
         const fileId = file.$id;
         data.featuredImage = fileId;
         const dbPost = await appwriteService.createPost({
