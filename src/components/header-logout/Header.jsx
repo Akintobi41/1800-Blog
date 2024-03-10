@@ -5,8 +5,10 @@ import LogoutBtn from "./LogoutBtn";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
-function Header() {
+function Header({ toggle, setToggle }) {
   const authStatus = useSelector((state) => state.auth.status); // Check if the user is logged or not
 
   const navigate = useNavigate();
@@ -38,38 +40,61 @@ function Header() {
     },
   ];
 
-  console.log(authStatus);
   //Learn how to use hex codes in tailwind CSS
 
-  return (
-    <header className=" flex items-center p-6 shadow bg-[#C4C1A4]">
-      <Container>
-        <nav className="flex">
-          <div className="mr-4">
-            <Logo></Logo>
-          </div>
-          <ul className="flex ml-auto">
-            {navItems.map((item) =>
-              item.active ? ( //logic for displaying the sections based on if the user is logged in or not
-                <>
-                  <li key={item.name} className="hidden sm:block">
-                    <button
-                      onClick={() => navigate(item.slug)}
-                      className="inline-block px-6 py-2 duration-200 hover:bg-[#9E9FA5] rounded-full"
-                    >
-                      {item.name}
-                    </button>
-                  </li>
-                </>
-              ) : null,
-            )}
-            <HamburgerMenu />
+  console.log(authStatus);
 
-            {authStatus && <LogoutBtn />}
-          </ul>
-        </nav>
-      </Container>
-    </header>
+  return (
+    <>
+      <header className=" flex items-center p-6 shadow bg-[#C4C1A4]">
+        <Container>
+          <nav className="flex items-center justify-between">
+            <div className="mr-4">
+              <Logo></Logo>
+            </div>
+            <div>
+              <HamburgerMenu toggle={toggle} setToggle={setToggle} />
+
+              <motion.ul
+                initial={{ opacity: 0, x: "100%", left: "100%" }}
+                animate={{
+                  opacity: toggle ? 1 : 0,
+                  x: toggle ? 0 : "100%",
+                  left: toggle ? 0 : "100%",
+                }}
+                transition={{ duration: 0.9 }}
+                className={`flex ml-auto items-center pt-[5rem] sm:p-0 ${
+                  !toggle
+                    ? "hidden sm:flex opacity-100"
+                    : "fixed flex bottom-0 top-0 z-10 bg-red-700 flex-col w-full"
+                } `}
+              >
+                {navItems.map((item) =>
+                  item.active ? ( //logic for displaying the sections based on if the user is logged in or not
+                    <>
+                      <li
+                        key={item.name}
+                        className={`mt-4 sm:mt-0 ${
+                          !toggle ? "hidden" : "block"
+                        } sm:block`}
+                      >
+                        <button
+                          onClick={() => navigate(item.slug)}
+                          className="inline-block px-4 py-2 duration-200 hover:bg-[#9E9FA5] rounded-full"
+                        >
+                          {item.name}
+                        </button>
+                      </li>
+                    </>
+                  ) : null,
+                )}
+                {authStatus && <LogoutBtn toggle={toggle} />}
+              </motion.ul>
+            </div>
+          </nav>
+        </Container>
+      </header>
+    </>
   );
 }
 

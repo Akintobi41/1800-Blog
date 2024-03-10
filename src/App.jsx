@@ -10,6 +10,7 @@ import Logo from "./components/logo/Logo";
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+  const [toggle, setToggle] = useState(null);
 
   useEffect(() => {
     authService
@@ -20,11 +21,16 @@ function App() {
       })
       .finally(() => setLoading(false));
   }, [dispatch]);
+  console.log(toggle);
 
   return !loading ? (
-    <div className="min-h-screen flex flex-wrap content-between bg-[#fff6dc]">
-      <div className="w-full block">
-        <Header />
+    <div
+      className={` overflow-x-hidden ${
+        toggle ? "h-screen" : "min-h-screen"
+      } flex flex-wrap content-between bg-[#fff6dc]`}
+    >
+      <div className="w-full block h-full">
+        <Header toggle={toggle} setToggle={setToggle} />
         <main className="p-6 bg-[#fff6dc]">
           <Outlet />
         </main>

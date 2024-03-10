@@ -3,8 +3,10 @@ import Logo from "../../components/logo/Logo";
 
 function Footer() {
   return (
-    <section className="relative overflow-hidden py-10 bg-[#C4C1A4] border border-t-2 border-t-black">
-      <div className="relative z-10 mx-auto max-w-7xl px-4">
+    // hid the overflow on the section element
+    <section className="relative py-10 bg-[rgb(196,193,164)] border border-t-2 border-t-black">
+      {/* i removed z index, z-10 from below div */}
+      <div className="relative mx-auto max-w-7xl px-4">
         <div className="-m-6 flex flex-wrap">
           <div className="w-full p-6 md:w-1/2 lg:w-5/12">
             <div className="flex h-full flex-col justify-between">
