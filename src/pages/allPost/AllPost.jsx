@@ -2,11 +2,15 @@ import appwriteService from "../../appwrite/config";
 import { useState, useEffect } from "react";
 import Container from "./../../components/container/Container";
 import PostCard from "./../../components/postCard/PostCard";
+import { useContext } from "react";
+import { MyContext } from "../../MyContext";
 
 function AllPost() {
+  const { toggle, setToggle } = useContext(MyContext);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+    setToggle(false); // reset hamburger menu
     appwriteService.getPosts([]).then((newPosts) => {
       if (newPosts) {
         setPosts(newPosts.documents);

@@ -1,7 +1,7 @@
 import { Login as LoginComponent } from "../../components/index";
 function Login() {
   return (
-    <div className="py-8">
+    <div className="py-8 sm:w-[43%]">
       <LoginComponent />
     </div>
   );

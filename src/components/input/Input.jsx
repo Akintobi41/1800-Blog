@@ -6,6 +6,7 @@ const Input = React.forwardRef(function Input(
   ref,
 ) {
   const id = useId();
+  console.log(id);
   return (
     <div className="w-full">
       {label && (
@@ -14,7 +15,7 @@ const Input = React.forwardRef(function Input(
         </label>
       )}
       <input
-        className={`px-3 py-2 rounded-lg bg-white text-black outline-none focus:bg-gray-200 w-full ${className}`}
+        className={`px-3 py-2 placeholder:text-sm placeholder:font-[500] rounded-lg border-[2px] border-solid border-[#8080801a] bg-[#00000000] w-full ${className}`}
         type={type}
         ref={ref}
         {...props}

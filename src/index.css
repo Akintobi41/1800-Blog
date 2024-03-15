@@ -1,5 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap');
+
+:root {
+    --primary-color: #ffffff;
+    --secondary-color: #abf600;
+    --black: #000000;
+    --alt: #f2fed1;
+}
+
+body {
+    color: var(--black);
+}
+
+form {
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+    }
+}
+
 @tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 h1 {
     @apply text-4xl;
@@ -12,8 +36,3 @@ h2 {
 h3 {
     @apply text-lg;
 }
-
-
-
-@tailwind components;
-@tailwind utilities;

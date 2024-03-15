@@ -40,13 +40,9 @@ function Header({ toggle, setToggle }) {
     },
   ];
 
-  //Learn how to use hex codes in tailwind CSS
-
-  console.log(authStatus);
-
   return (
     <>
-      <header className=" flex items-center p-6 shadow bg-[#C4C1A4]">
+      <header className=" flex items-center p-6 shadow bg-[var(--primary-color)] border-x-0 border-b-[1px] border-solid border-[var(--black)]">
         <Container>
           <nav className="flex items-center justify-between">
             <div className="mr-4">
@@ -62,30 +58,28 @@ function Header({ toggle, setToggle }) {
                   x: toggle ? 0 : "100%",
                   left: toggle ? 0 : "100%",
                 }}
-                transition={{ duration: 0.9 }}
+                transition={{ duration: 0.29 }}
                 className={`flex ml-auto items-center pt-[5rem] sm:p-0 ${
                   !toggle
                     ? "hidden sm:flex opacity-100"
-                    : "fixed flex bottom-0 top-0 z-10 bg-red-700 flex-col w-full"
+                    : "fixed flex bottom-0 top-0 z-10 bg-[var(--alt)] flex-col w-full"
                 } `}
               >
                 {navItems.map((item) =>
                   item.active ? ( //logic for displaying the sections based on if the user is logged in or not
-                    <>
-                      <li
-                        key={item.name}
-                        className={`mt-4 sm:mt-0 ${
-                          !toggle ? "hidden" : "block"
-                        } sm:block`}
+                    <li
+                      key={item.name}
+                      className={`mt-4 sm:mt-0 ${
+                        !toggle ? "hidden" : "block"
+                      } sm:block`}
+                    >
+                      <button
+                        onClick={() => navigate(item.slug)}
+                        className="inline-block px-4 py-2 duration-200 hover:bg-[#9E9FA5] rounded-full"
                       >
-                        <button
-                          onClick={() => navigate(item.slug)}
-                          className="inline-block px-4 py-2 duration-200 hover:bg-[#9E9FA5] rounded-full"
-                        >
-                          {item.name}
-                        </button>
-                      </li>
-                    </>
+                        {item.name}
+                      </button>
+                    </li>
                   ) : null,
                 )}
                 {authStatus && <LogoutBtn toggle={toggle} />}

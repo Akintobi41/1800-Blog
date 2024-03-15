@@ -6,11 +6,13 @@ import Header from "./components/header-logout/Header";
 import Footer from "./components/footer/Footer";
 import authService from "./appwrite/auth";
 import Logo from "./components/logo/Logo";
+import { MyContext } from "./MyContext";
 
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState(null);
+  const [loader, setLoader] = useState(true);
 
   useEffect(() => {
     authService
@@ -21,24 +23,26 @@ function App() {
       })
       .finally(() => setLoading(false));
   }, [dispatch]);
-  console.log(toggle);
 
   return !loading ? (
-    <div
-      className={` overflow-x-hidden ${
-        toggle ? "h-screen" : "min-h-screen"
-      } flex flex-wrap content-between bg-[#fff6dc]`}
-    >
-      <div className="w-full block h-full">
-        <Header toggle={toggle} setToggle={setToggle} />
-        <main className="p-6 bg-[#fff6dc]">
-          <Outlet />
-        </main>
+    <MyContext.Provider value={{ toggle, setToggle, loader, setLoader }}>
+      {" "}
+      <div
+        className={` overflow-x-hidden ${
+          toggle ? "h-screen" : "min-h-screen"
+        } flex flex-wrap content-between bg-[#ffffff]`}
+      >
+        <div className="w-full block h-full">
+          <Header toggle={toggle} setToggle={setToggle} />
+          <main className="bg-[#ffffff]">
+            <Outlet setToggle={setToggle} />
+          </main>
+        </div>
+        <div className="w-full block">
+          <Footer />
+        </div>
       </div>
-      <div className="w-full block">
-        <Footer />
-      </div>
-    </div>
+    </MyContext.Provider>
   ) : null;
 }
 
