@@ -11,7 +11,7 @@ import Select from "../select/Select";
 // import authService from "../../appwrite/auth";
 
 function PostForm({ post }) {
-  console.log(post, "post");
+  post, "post";
   // postForm will be accepting a post
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
@@ -27,8 +27,8 @@ function PostForm({ post }) {
   const userData = useSelector((state) => state.auth.userData); // accessing the store
 
   const submit = async (data) => {
-    console.log(data);
-    console.log(post);
+    data;
+    post;
 
     if (post) {
       const file = data.image[0]
@@ -46,13 +46,13 @@ function PostForm({ post }) {
         navigate(`/post/${dbPost.$slug}`);
       }
     } else {
-      console.log("no post ");
+      ("no post ");
       const file = await appwriteService.uploadFile(data.image[0]);
-      console.log(file);
+      file;
 
       if (file) {
-        console.log(data);
-        console.log(file);
+        data;
+        file;
         const fileId = file.$id;
         data.featuredImage = fileId;
         const dbPost = await appwriteService.createPost({

@@ -19,7 +19,7 @@ export class AuthService {
     try {
       return await this.databases.getDocument(dataId, collectionId, slug);
     } catch (error) {
-      console.log("Appwrite service :: getPost() :: ", error);
+      ("Appwrite service :: getPost() :: ", error);
       return false;
     }
   }
@@ -28,7 +28,7 @@ export class AuthService {
     try {
       return await this.databases.listDocuments(dataId, collectionId, queries);
     } catch (error) {
-      console.log("Appwrite service :: getPosts() :: ", error);
+      ("Appwrite service :: getPosts() :: ", error);
       return false;
     }
   }
@@ -43,13 +43,13 @@ export class AuthService {
         userId,
       });
     } catch (error) {
-      console.log("Appwrite service :: createPost() :: ", error);
+      ("Appwrite service :: createPost() :: ", error);
       return false;
     }
   }
 
   async updatePost(slug, { title, content, featuredImage, status }) {
-    console.log(slug)
+    (slug)
     try {
       return await this.databases.updateDocument(dataId, collectionId, slug, {
         title,
@@ -58,7 +58,7 @@ export class AuthService {
         status,
       });
     } catch (error) {
-      console.log("Appwrite service :: updatePost() :: ", error);
+      ("Appwrite service :: updatePost() :: ", error);
       return false;
     }
   }
@@ -68,7 +68,7 @@ export class AuthService {
       await this.databases.deleteDocument(dataId, collectionId, slug);
       return true;
     } catch (error) {
-      console.log("Appwrite service :: deletePost() :: ", error);
+      ("Appwrite service :: deletePost() :: ", error);
       return false;
     }
   }
@@ -79,7 +79,7 @@ export class AuthService {
     try {
       return await this.bucket.createFile(bucketId, ID.unique(), file);
     } catch (error) {
-      console.log("Appwrite service :: createFile() :: ", error);
+      ("Appwrite service :: createFile() :: ", error);
       return false;
     }
   }
@@ -87,7 +87,7 @@ export class AuthService {
     try {
       await this.storage.deleteFile(bucketId, fileID);
     } catch (error) {
-      console.log("Appwrite service :: uploadFile() :: ", error);
+      ("Appwrite service :: uploadFile() :: ", error);
       return false;
     }
   }

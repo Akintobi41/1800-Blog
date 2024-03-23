@@ -7,6 +7,27 @@
     --alt: #f2fed1;
 }
 
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+swiper-container {
+    width: 90%;
+    height: 250px;
+    line-height: 200px;
+    text-align: center;
+}
+
+swiper-slide {
+    background-color: rgb(4 47 46);
+    color: #fff;
+    font-size: 25px;
+}
+
 body {
     color: var(--black);
 }

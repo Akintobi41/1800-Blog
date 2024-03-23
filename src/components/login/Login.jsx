@@ -74,7 +74,7 @@ function Login() {
               Sign in{" "}
             </Button>
           </div>
-          <p className="mt-2 text-center text-base text-black/60 mt-6">
+          <p className="mt-2 text-center text-base text-black/60">
             Don&apos;t have any account?&nbsp;
             <Link
               to="/signup"

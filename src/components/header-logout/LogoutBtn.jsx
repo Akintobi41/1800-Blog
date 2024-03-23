@@ -10,13 +10,14 @@ function LogoutBtn({ toggle }) {
       dispatch(logout());
     });
   };
-  console.log(toggle);
+
+  toggle;
 
   return (
     <button
       className={`${
-        toggle ? "inline-block" : ""
-      }  sm:inline-block px-6 py-2 duration-200 hover:bg-[#9E9FA5] rounded-full mt-4`}
+        toggle ? "inline-block" : "hidden"
+      }  sm:inline-block px-6 duration-200 hover:underline mt-4`}
       onClick={logoutHandler}
     >
       {" "}

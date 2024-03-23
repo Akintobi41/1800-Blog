@@ -1,12 +1,11 @@
+/* eslint-disable react/prop-types */
 import Container from "./../container/Container";
 import Logo from "./../logo/Logo";
-import { Link } from "react-router-dom";
 import LogoutBtn from "./LogoutBtn";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useRef } from "react";
 
 function Header({ toggle, setToggle }) {
   const authStatus = useSelector((state) => state.auth.status); // Check if the user is logged or not
@@ -39,6 +38,8 @@ function Header({ toggle, setToggle }) {
       active: authStatus,
     },
   ];
+  const ref = useRef();
+  toggle;
 
   return (
     <>
@@ -51,39 +52,29 @@ function Header({ toggle, setToggle }) {
             <div>
               <HamburgerMenu toggle={toggle} setToggle={setToggle} />
 
-              <motion.ul
-                initial={{ opacity: 0, x: "100%", left: "100%" }}
-                animate={{
-                  opacity: toggle ? 1 : 0,
-                  x: toggle ? 0 : "100%",
-                  left: toggle ? 0 : "100%",
-                }}
-                transition={{ duration: 0.29 }}
-                className={`flex ml-auto items-center pt-[5rem] sm:p-0 ${
+              <ul
+                className={`flex ml-auto items-center sm:items-baseline sm:p-0 ${
                   !toggle
-                    ? "hidden sm:flex opacity-100"
-                    : "fixed flex bottom-0 top-0 z-10 bg-[var(--alt)] flex-col w-full"
+                    ? "sm:flex opacity-100 bg-red left-0"
+                    : "fixed flex bottom-0 top-0 bg-red pt-[5rem] left-0 z-10 bg-[var(--alt)] flex-col w-full sm:opacity-100"
                 } `}
+                ref={ref}
               >
                 {navItems.map((item) =>
                   item.active ? ( //logic for displaying the sections based on if the user is logged in or not
                     <li
                       key={item.name}
-                      className={`mt-4 sm:mt-0 ${
+                      className={`mt-4 relative sm:mt-0 px-4 py-2 cursor-pointer transition hover:underline duration-400 ${
                         !toggle ? "hidden" : "block"
                       } sm:block`}
+                      onClick={() => navigate(item.slug)}
                     >
-                      <button
-                        onClick={() => navigate(item.slug)}
-                        className="inline-block px-4 py-2 duration-200 hover:bg-[#9E9FA5] rounded-full"
-                      >
-                        {item.name}
-                      </button>
+                      {item.name}
                     </li>
                   ) : null,
                 )}
                 {authStatus && <LogoutBtn toggle={toggle} />}
-              </motion.ul>
+              </ul>
             </div>
           </nav>
         </Container>

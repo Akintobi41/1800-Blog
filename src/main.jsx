@@ -13,6 +13,10 @@ import Login from "./pages/login/Login.jsx";
 import Post from "./pages/post/Post.jsx";
 import Signup from "./pages/signup/Signup";
 import store from "./store/store.js";
+// import function to register Swiper custom elements
+import { register } from "swiper/element/bundle";
+// register Swiper custom elements
+register();
 
 const router = createBrowserRouter([
   {

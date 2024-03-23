@@ -16,13 +16,13 @@ function Protected({ children, authentication = true }) {
     const redirectToLogin = authentication && authStatus !== authentication;
     const redirectToHome = !authentication && authStatus !== authentication;
 
-    console.log(redirectToHome, redirectToLogin);
+    redirectToHome, redirectToLogin;
     if (redirectToLogin) {
       navigate("/login");
-      console.log("login");
+      ("login");
     } else if (redirectToHome) {
       navigate("/");
-      console.log("home");
+      ("home");
     }
     setLoader(false); // Adjust this based on whether it should be inside the conditions
   }, [authStatus, authentication, navigate]);
