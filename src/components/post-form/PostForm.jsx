@@ -8,10 +8,8 @@ import Button from "../button/Button";
 import Input from "../input/Input";
 import RTE from "../rte/RTE";
 import Select from "../select/Select";
-// import authService from "../../appwrite/auth";
 
 function PostForm({ post }) {
-  post, "post";
   // postForm will be accepting a post
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
@@ -88,10 +86,12 @@ function PostForm({ post }) {
       <div className="w-2/3 px-2">
         <Input
           label="Title"
-          placeholder="Title"
-          className="mb-4"
+          placeholder="Title (30 characters please)"
+          className="mb-4 [max-]"
+          maxlength="30"
           {...register("title", { required: true })}
         />
+
         <Input
           label="Slug :"
           placeholder="Slug"

@@ -31,23 +31,18 @@ function Home() {
       {loader && <Loader />}
 
       <div className="w-full py-8">
+        <h2 className="text-xl font-bold px-4">Latest News</h2>
         <Container>
-          <div className="flex flex-wrap p-6 justify-center">
-            <swiper-container>
-              {
-                // posts?.length
-
-                posts.length ? (
-                  posts.map((post) => (
-                    <swiper-slide className="p-2 w-1/4" key={post.$id}>
-                      <PostCard {...post} />
-                    </swiper-slide>
-                  ))
-                ) : (
-                  <h1 className="text-[20px]"> Login to read posts</h1>
-                )
-              }
-            </swiper-container>
+          <div className="flex flex-wrap p-4 justify-center w-full gap-y-[3rem]">
+            {posts.length ? (
+              posts.map((post) => (
+                <div className="w-full xs:w-1/2" key={post.$id}>
+                  <PostCard {...post} />
+                </div>
+              ))
+            ) : (
+              <h1 className="text-[20px]"> Login to read posts</h1>
+            )}
           </div>
         </Container>
       </div>

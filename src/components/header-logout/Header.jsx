@@ -45,7 +45,7 @@ function Header({ toggle, setToggle }) {
     <>
       <header className=" flex items-center p-6 shadow bg-[var(--primary-color)] border-x-0 border-b-[1px] border-solid border-[var(--black)]">
         <Container>
-          <nav className="flex items-center justify-between">
+          <nav className="flex items-center justify-between w-full">
             <div className="mr-4">
               <Logo></Logo>
             </div>

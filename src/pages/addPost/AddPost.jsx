@@ -6,8 +6,6 @@ import { useContext, useEffect } from "react";
 function AddPost() {
   const { toggle, setToggle } = useContext(MyContext);
 
-  console.log(toggle);
-
   useEffect(() => {
     setToggle(false);
   }, []);
