@@ -4,9 +4,10 @@ import Container from "./../../components/container/Container";
 import PostCard from "./../../components/postCard/PostCard";
 import { useContext } from "react";
 import { MyContext } from "../../MyContext";
+import Home from "../home/Home";
 
 function AllPost() {
-  const { toggle, setToggle } = useContext(MyContext);
+  const { setToggle } = useContext(MyContext);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -19,21 +20,22 @@ function AllPost() {
   }, []);
 
   return (
-    <div className="w-full py-8">
-      <Container>
-        <div className="flex flex-wrap">
-          {posts?.length ? (
-            posts.map((post) => (
-              <div className="p-2 w-full" key={post.$id}>
-                <PostCard {...post} />
-              </div>
-            ))
-          ) : (
-            <h1> No posts to display yet</h1>
-          )}
-        </div>
-      </Container>
-    </div>
+    // <div className="w-full py-8">
+    //   <Container>
+    //     <div className="flex flex-wrap">
+    //       {posts?.length ? (
+    //         posts.map((post) => (
+    //           <div className="p-2 w-full" key={post.$id}>
+    //             <PostCard {...post} />
+    //           </div>
+    //         ))
+    //       ) : (
+    //         <h1> No posts to display yet</h1>
+    //       )}
+    //     </div>
+    //   </Container>
+    // </div>
+    <Home />
   );
 }
 

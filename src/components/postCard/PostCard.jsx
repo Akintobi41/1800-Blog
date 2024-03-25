@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import appwriteService from "../../appwrite/config";
 import parse from "html-react-parser";
 
-function PostCard({ $id, title, featuredImage, content, ...props }) {
-  console.log(content);
+function PostCard({ $id, title, featuredImage, content }) {
   return (
     <Link to={`/post/${$id}`}>
       <div className="max-w-full w-full overflow-hidden shadow-sm h-[18rem] border-b-[1px]">
@@ -15,15 +14,13 @@ function PostCard({ $id, title, featuredImage, content, ...props }) {
             className="w-full h-full object-cover"
           />
         </div>
-        <h2 className="text-xl font-bold">{title}</h2>
+        <h2 className="text-xl font-bold px-2">{title}</h2>
 
-        <p>{parse(content)}</p>
+        <p className="whitespace-wrap overflow-hidden text-ellipsis px-2 w-[350px]">
+          {parse(content)}
+        </p>
       </div>
     </Link>
   );
 }
-//limit title characters
-// I IMPLEMENTED THAT ON THE BACKEND AS WELL AS ON THE FRONT END
-// Also using the HTML REACT PARSER to make changes to my content coming from Appwrite to make it in good format
-
 export default PostCard;

@@ -25,8 +25,8 @@ function PostForm({ post }) {
   const userData = useSelector((state) => state.auth.userData); // accessing the store
 
   const submit = async (data) => {
-    data;
-    post;
+    console.log(data);
+    console.log(post);
 
     if (post) {
       const file = data.image[0]
@@ -49,14 +49,15 @@ function PostForm({ post }) {
       file;
 
       if (file) {
-        data;
-        file;
+        console.log(file);
+
         const fileId = file.$id;
         data.featuredImage = fileId;
         const dbPost = await appwriteService.createPost({
           ...data,
           userId: userData.$id,
         });
+        console.log(dbPost);
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
         }
@@ -88,7 +89,7 @@ function PostForm({ post }) {
           label="Title"
           placeholder="Title (30 characters please)"
           className="mb-4 [max-]"
-          maxlength="30"
+          maxlength="20"
           {...register("title", { required: true })}
         />
 
