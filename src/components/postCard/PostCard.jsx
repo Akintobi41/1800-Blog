@@ -16,9 +16,9 @@ function PostCard({ $id, title, featuredImage, content }) {
         </div>
         <h2 className="text-xl font-bold px-2">{title}</h2>
 
-        <p className="whitespace-wrap overflow-hidden text-ellipsis px-2 w-[350px]">
+        <div className="whitespace-wrap overflow-hidden text-ellipsis px-2 w-[350px]">
           {parse(content)}
-        </p>
+        </div>
       </div>
     </Link>
   );

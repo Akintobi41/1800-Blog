@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import Protected from "./components/authLayout/AuthLayout.jsx";
-import "./index.css";
 import AddPost from "./pages/addPost/AddPost.jsx";
 import AllPost from "./pages/allPost/AllPost.jsx";
 import EditPost from "./pages/editPost/EditPost.jsx";
@@ -13,6 +12,7 @@ import Login from "./pages/login/Login.jsx";
 import Post from "./pages/post/Post.jsx";
 import Signup from "./pages/signup/Signup";
 import store from "./store/store.js";
+import "./index.css";
 
 const router = createBrowserRouter([
   {

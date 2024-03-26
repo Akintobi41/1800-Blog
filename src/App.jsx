@@ -6,6 +6,7 @@ import authService from "./appwrite/auth";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header-logout/Header";
 import { login, logout } from "./store/authSlice";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -21,28 +22,33 @@ function App() {
         else dispatch(logout());
       })
       .finally(() => setLoading(false));
-  }, [dispatch]);
+  }, []);
 
-  return !loading ? (
-    <MyContext.Provider value={{ toggle, setToggle, loader, setLoader }}>
-      {" "}
-      <div
-        className={`  ${
-          toggle ? "h-screen" : "min-h-screen"
-        } flex flex-wrap content-between bg-[#ffffff]`}
-      >
-        <div className="w-full block h-full">
-          <Header toggle={toggle} setToggle={setToggle} />
-          <main className="bg-[#ffffff]">
-            <Outlet setToggle={setToggle} />
-          </main>
-        </div>
-        <div className="w-full block">
-          <Footer />
-        </div>
-      </div>
-    </MyContext.Provider>
-  ) : null;
+  const queryClient = new QueryClient();
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <MyContext.Provider value={{ setToggle }}>
+        {!loading && (
+          <div
+            className={`  ${
+              toggle ? "h-screen" : "min-h-screen"
+            } flex flex-wrap bg-[#ffffff]`}
+          >
+            <div className="w-full block h-full">
+              <Header toggle={toggle} setToggle={setToggle} />
+              <main className="bg-[#ffffff]">
+                <Outlet />
+              </main>
+            </div>
+            <div className="w-full block">
+              <Footer />
+            </div>
+          </div>
+        )}
+      </MyContext.Provider>
+    </QueryClientProvider>
+  );
 }
 
 export default App;

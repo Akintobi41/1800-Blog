@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../MyContext";
@@ -16,7 +17,6 @@ function Protected({ children, authentication = true }) {
     const redirectToLogin = authentication && authStatus !== authentication;
     const redirectToHome = !authentication && authStatus !== authentication;
 
-    redirectToHome, redirectToLogin;
     if (redirectToLogin) {
       navigate("/login");
       ("login");

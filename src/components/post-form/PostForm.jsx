@@ -25,9 +25,6 @@ function PostForm({ post }) {
   const userData = useSelector((state) => state.auth.userData); // accessing the store
 
   const submit = async (data) => {
-    console.log(data);
-    console.log(post);
-
     if (post) {
       const file = data.image[0]
         ? await appwriteService.uploadFile(data.image[0])
@@ -49,15 +46,12 @@ function PostForm({ post }) {
       file;
 
       if (file) {
-        console.log(file);
-
         const fileId = file.$id;
         data.featuredImage = fileId;
         const dbPost = await appwriteService.createPost({
           ...data,
           userId: userData.$id,
         });
-        console.log(dbPost);
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
         }

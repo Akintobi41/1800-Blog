@@ -1,26 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react'
-import appwriteService from '../appwrite/config';
+import { useContext, useEffect, useState } from 'react';
 import { MyContext } from '../MyContext';
-import { useContext } from 'react';
-
+import appwriteService from '../appwrite/config';
 
 export default function usePosts() {
-
-    const [posts, setPosts] = useState([]);
     const { loader, setToggle, setLoader } = useContext(MyContext)
+    const [posts, setPosts] = useState([]);
+
 
     useEffect(() => {
-
-        setLoader(true);
         setToggle(false);
-
         appwriteService.getPosts([]).then((newPosts) => {
-            if (newPosts) {
-                setPosts(newPosts.documents);
-            } else {
-                setPosts(newPosts);
-            }
+            setPosts(newPosts.documents || newPosts);
             setLoader(false);
         })
 
