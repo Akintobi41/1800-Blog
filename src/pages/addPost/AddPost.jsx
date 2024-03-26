@@ -4,7 +4,7 @@ import { MyContext } from "../../MyContext";
 import { useContext, useEffect } from "react";
 
 function AddPost() {
-  const { toggle, setToggle } = useContext(MyContext);
+  const { setToggle } = useContext(MyContext);
 
   useEffect(() => {
     setToggle(false);

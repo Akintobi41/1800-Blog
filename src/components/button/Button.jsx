@@ -2,14 +2,14 @@
 function Button({
   children,
   type = "button",
-  bgColor = "bg-blue-600",
-  textColor = "text-white",
+  bgColor = "bg-[var(--secondary-color)]",
+  textColor = "text-[var(--black)]",
   className = "",
   ...props
 }) {
   return (
     <button
-      className={`px-6 py-2 rounded-lg ${bgColor} ${textColor} ${className}`}
+      className={`px-6 py-2 rounded-lg font-bold ${bgColor} ${textColor} ${className}`}
       {...props}
     >
       {children}

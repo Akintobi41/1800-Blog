@@ -1,7 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import App from "./App.jsx";
 import Protected from "./components/authLayout/AuthLayout.jsx";
 import AddPost from "./pages/addPost/AddPost.jsx";
@@ -41,11 +45,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/all-posts",
-        element: (
-          <Protected authentication>
-            <AllPost />
-          </Protected>
-        ),
+        element: <Navigate to="/" />,
       },
       {
         path: "/add-post",

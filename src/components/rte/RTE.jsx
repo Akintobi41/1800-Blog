@@ -4,7 +4,7 @@ import { Editor } from "@tinymce/tinymce-react";
 function RTE({ name, control, label, defaultValue = "" }) {
   const api_Key = import.meta.env.VITE_APP_TINY_MCE;
   return (
-    <div className="w-full">
+    <div className="w-full h-[30rem]">
       {label && <label className="inline-block mb-1 pl-1"> {label}</label>}
       <Controller
         name={name || "content"}
