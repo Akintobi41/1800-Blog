@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../../MyContext";
@@ -14,11 +15,19 @@ function Signup() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
-  const { toggle, setToggle } = useContext(MyContext);
+  const { register, handleSubmit, watch, formState } = useForm();
+  const watchAllFields = watch(); // when pass nothing as argument, you are watching everything
+  const { errors } = formState;
+  const { name, email, password } = errors;
+  const { setToggle } = useContext(MyContext);
+  const [disabled, setDisabled] = useState(false);
 
   const create = async (data) => {
+    console.log(data);
+    console.log("is button disabled");
     setError(""); // for resetting the error on to the initial state
+    setDisabled(true);
+    console.log(disabled);
 
     try {
       const userData = await authService.createAccount(data);
@@ -29,12 +38,22 @@ function Signup() {
       }
     } catch (error) {
       setError(error.message);
+    } finally {
+      setDisabled(false);
+      console.log(disabled, "disabled");
     }
   };
 
   useEffect(() => {
     setToggle(false);
   }, []);
+  // useEffect(() => {
+  //   const sub = watch(
+  //     (value, { name, type }) =>
+  //       // console.log(value, name, type),l'dj
+  //       "fk",
+  //   );
+  // }, [handleSubmit]);
 
   return (
     <div className="flex items-center justify-center px-6">
@@ -47,26 +66,31 @@ function Signup() {
         <h6 className="text-center text-2xl font-[500] leading-tight">
           Sign up to <Title />
         </h6>
-        {/* <p className="mt-2 text-center text-base text-black/60">
-          Already have an account?&nbsp;
-          <Link
-            to="/login"
-            className="font-medium text-primary transition-all duration-200 hover:underline"
-          >
-            Sign In
-          </Link>
-        </p> */}
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-        <form onSubmit={handleSubmit(create)} className="mt-8">
-          <div className="space-y-5">
+        <form onSubmit={handleSubmit(create)} className="mt-8" noValidate>
+          <div className="">
             <Input
-              {...register("name", { required: true })}
+              {...register("name", {
+                required: true,
+                maxLength: 40,
+                pattern: /^[A-Za-z\s]+$/i,
+              })}
               label="Full Name : "
-              placeholder="Full Name"
+              type="text"
+              placeholder="Full Name (0 to 40 characters)"
+              maxLength="40"
             />
+            <small className="h-[20px] block text-[red] my-[-.35rem]">
+              {name?.type === "pattern" ? "Invalid Name Format" : ""}
+            </small>
             <Input
               {...register("email", {
                 required: true,
+                pattern: {
+                  // esl int-disable-next-line no-useless-escape
+                  value: "[^@s]+@[^@s]+",
+                  message: "Invalid email format",
+                },
               })}
               label="Email : "
               placeholder="Email Address"
@@ -80,11 +104,16 @@ function Signup() {
             />
             <Button
               type="submit"
-              className="w-full"
+              className="w-full relative mt-10"
               bgColor={"bg-[#abf600]"}
               textColor={"text-black"}
+              disabled={disabled}
             >
-              Create Account
+              {disabled ? (
+                <div className="absolute w-6 h-6 rounded-[50%] border-4 border-r-[4px] border-r-[green] border-[rgba(128,128,128,.7)] animate-spin"></div>
+              ) : (
+                "Create Account"
+              )}
             </Button>
           </div>
           <div className="text-[.7rem] text-center mt-4">

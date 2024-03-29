@@ -8,7 +8,7 @@ const Input = React.forwardRef(function Input(
   const id = useId();
 
   return (
-    <div className="w-full">
+    <div className="w-full my-[.5rem]">
       {label && (
         <label htmlFor={id} className="inline-block mb-4 pl-1">
           {label}{" "}

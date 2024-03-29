@@ -20,10 +20,8 @@ function PostForm({ post }) {
         status: post?.status || "active",
       },
     });
-
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData); // accessing the store
-
   const submit = async (data) => {
     if (post) {
       const file = data.image[0]

@@ -1,17 +1,23 @@
+/* eslint-disable react/prop-types */
 import { useDispatch } from "react-redux";
 import authService from "../../appwrite/auth";
 import { logout } from "../../store/authSlice";
+import { useEffect } from "react";
+import { MyContext } from "../../MyContext";
+import { useContext } from "react";
 
-function LogoutBtn({ toggle }) {
+function LogoutBtn() {
   const dispatch = useDispatch();
-
+  const { setToggle } = useContext(MyContext);
   const logoutHandler = () => {
     authService.logout().then(() => {
       dispatch(logout());
     });
   };
 
-  toggle;
+  useEffect(() => {
+    setToggle(false);
+  }, []);
 
   return (
     <button
