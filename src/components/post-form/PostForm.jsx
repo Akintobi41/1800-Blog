@@ -86,11 +86,8 @@ function PostForm({ post }) {
   }, [watch, slugTransform, setValue]);
 
   function fileUpload(e) {
-    // console.log("boy");
-
     let reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
-    console.log(e.target.files);
     reader.onload = () => {
       setVal(reader.result);
     };
@@ -166,7 +163,12 @@ function PostForm({ post }) {
           </div>
         )}
 
-        <Button type="submit" loading={loading} disabled={disabled}>
+        <Button
+          type="submit"
+          className="w-full"
+          loading={loading}
+          disabled={disabled}
+        >
           {post ? "Update" : "Submit"}
         </Button>
       </div>

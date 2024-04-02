@@ -14,7 +14,7 @@ const Input = React.forwardRef(function Input(
           htmlFor={id}
           className={`inline-block mb-4 pl-1 cursor-pointer ${
             type === "file"
-              ? "block relative text-[var(--black)] w-full text-center text-[1.3rem] border-dashed border-[3px] rounded-[5px]"
+              ? "block relative text-[var(--black)] w-full text-center border-dashed border-[3px] rounded-[5px]"
               : ""
           }`}
         >
