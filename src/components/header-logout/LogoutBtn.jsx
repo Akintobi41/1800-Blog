@@ -8,7 +8,7 @@ import { useContext } from "react";
 
 function LogoutBtn() {
   const dispatch = useDispatch();
-  const { setToggle } = useContext(MyContext);
+  const { toggle, setToggle } = useContext(MyContext);
   const logoutHandler = () => {
     authService.logout().then(() => {
       dispatch(logout());

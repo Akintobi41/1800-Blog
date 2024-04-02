@@ -10,12 +10,21 @@ const Input = React.forwardRef(function Input(
   return (
     <div className="w-full my-[.5rem]">
       {label && (
-        <label htmlFor={id} className="inline-block mb-4 pl-1">
-          {label}{" "}
+        <label
+          htmlFor={id}
+          className={`inline-block mb-4 pl-1 cursor-pointer ${
+            type === "file"
+              ? "block relative text-[var(--black)] w-full text-center text-[1.3rem] border-dashed border-[3px] rounded-[5px]"
+              : ""
+          }`}
+        >
+          {label} {type === "file" ? "Choose A Photo" : ""}
         </label>
       )}
       <input
-        className={`px-3 py-2 placeholder:text-sm placeholder:font-[500] rounded-lg border-[2px] border-solid border-[#8080801a] bg-[#00000000] w-full ${className}`}
+        className={`${
+          type === "file" ? "hidden" : ""
+        } px-3 py-2 placeholder:text-sm placeholder:font-[500] rounded-lg border-[2px] border-solid border-[#8080801a] bg-[#00000000] w-full ${className}`}
         type={type}
         ref={ref}
         {...props}

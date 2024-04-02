@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -7,9 +7,12 @@ import appwriteService from "../../appwrite/config";
 import Button from "../button/Button";
 import Input from "../input/Input";
 import RTE from "../rte/RTE";
-import Select from "../select/Select";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function PostForm({ post }) {
+  // const element = <FontAwesomeIcon icon="fa-solid fa-upload" />;
   // postForm will be accepting a post
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
@@ -17,12 +20,19 @@ function PostForm({ post }) {
         title: post?.title || "",
         slug: post?.slug || "",
         content: post?.content || "",
-        status: post?.status || "active",
       },
     });
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData); // accessing the store
+  const [loading, setLoading] = useState(null);
+  const [disabled, setDisabled] = useState(false);
+
+  const [val, setVal] = useState(null);
+  const [caption, setCaption] = useState("");
+
   const submit = async (data) => {
+    setLoading(true);
+    setDisabled(true);
     if (post) {
       const file = data.image[0]
         ? await appwriteService.uploadFile(data.image[0])
@@ -41,7 +51,6 @@ function PostForm({ post }) {
     } else {
       ("no post ");
       const file = await appwriteService.uploadFile(data.image[0]);
-      file;
 
       if (file) {
         const fileId = file.$id;
@@ -55,6 +64,8 @@ function PostForm({ post }) {
         }
       }
     }
+    setLoading(false);
+    setDisabled(false);
   };
 
   const slugTransform = useCallback((value) => {
@@ -73,6 +84,18 @@ function PostForm({ post }) {
       }
     });
   }, [watch, slugTransform, setValue]);
+
+  function fileUpload(e) {
+    // console.log("boy");
+
+    let reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    console.log(e.target.files);
+    reader.onload = () => {
+      setVal(reader.result);
+    };
+    setCaption(e.target.files[0].name);
+  }
 
   return (
     <form
@@ -117,14 +140,22 @@ function PostForm({ post }) {
         />
       </div>
       <div className="1/3 mt-12">
+        <p className="mb-2">Featured Image:</p>
+        <figure className="">
+          <img src={val} alt="" className="w-[6rem] h-[6rem]" />
+          <figcaption id="file-name">{caption}</figcaption>
+        </figure>
         <Input
-          label="Featured Image"
+          label={<FontAwesomeIcon icon={faFileUpload} className="mr-4" />}
           type="file"
+          id="img"
           className="mb-4"
+          onInput={(e) => {
+            fileUpload(e);
+          }}
           accept="image/png, image/jpg, image/jpeg"
           {...register("image", { required: !post })}
         />
-
         {post && (
           <div className="w-full mb-4">
             <img
@@ -134,13 +165,10 @@ function PostForm({ post }) {
             />
           </div>
         )}
-        <Select
-          options={["active", "inactive"]}
-          label="Status"
-          className="mb-4"
-          {...register("status", { required: true })}
-        />
-        <Button type="submit">{post ? "Update" : "Submit"}</Button>
+
+        <Button type="submit" loading={loading} disabled={disabled}>
+          {post ? "Update" : "Submit"}
+        </Button>
       </div>
     </form>
   );

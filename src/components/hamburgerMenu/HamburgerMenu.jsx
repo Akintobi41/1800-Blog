@@ -1,5 +1,10 @@
 /* eslint-disable react/prop-types */
-function HamburgerMenu({ toggle, setToggle }) {
+import { useContext } from "react";
+import { MyContext } from "../../MyContext";
+
+function HamburgerMenu() {
+  const { toggle, setToggle } = useContext(MyContext);
+
   function menuToggle() {
     setToggle(!toggle);
   }

@@ -9,16 +9,19 @@ import Button from "../button/Button";
 import Input from "../input/Input";
 import Logo from "../logo/Logo";
 import Title from "../title/Title";
+import ButtonLoader from "../button/ButtonLoader";
 
 function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const { toggle, setToggle } = useContext(MyContext);
+  const { setToggle } = useContext(MyContext);
+  const [disabled, setDisabled] = useState(null);
 
   const login = async (data) => {
     setError(""); // Resetting the error to the initial state
+    setDisabled(true);
     try {
       const session = await authService.login(data);
 
@@ -29,6 +32,8 @@ function Login() {
       }
     } catch (error) {
       setError(error.message);
+    } finally {
+      setDisabled(false);
     }
   };
 
@@ -48,7 +53,9 @@ function Login() {
           Sign in to <Title />
         </h2>
 
-        {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+        {error && (
+          <p className="text-red-600 mt-8 text-center h-[.5rem]">{error}</p>
+        )}
         <form onSubmit={handleSubmit(login)} className="mt-8 w-full">
           <div className="space-y-5 w-full">
             <Input
@@ -70,8 +77,9 @@ function Login() {
               className="w-full"
               bgColor={"bg-[#abf600]"}
               textColor={"text-[var(--black)]"}
+              disabled={disabled}
             >
-              Sign in{" "}
+              {disabled ? <ButtonLoader /> : "Sign in"}{" "}
             </Button>
           </div>
           <p className="mt-2 text-center text-base text-black/60">

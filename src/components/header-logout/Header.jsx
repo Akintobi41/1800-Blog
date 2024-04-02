@@ -6,8 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
 import { useRef } from "react";
+import { MyContext } from "../../MyContext";
+import { useContext } from "react";
 
-function Header({ toggle, setToggle }) {
+function Header() {
   const authStatus = useSelector((state) => state.auth.status); // Check if the user is logged or not
 
   const navigate = useNavigate();
@@ -39,7 +41,7 @@ function Header({ toggle, setToggle }) {
     },
   ];
   const ref = useRef();
-  toggle;
+  const { toggle } = useContext(MyContext);
 
   return (
     <>
@@ -50,7 +52,7 @@ function Header({ toggle, setToggle }) {
               <Logo></Logo>
             </div>
             <div>
-              <HamburgerMenu toggle={toggle} setToggle={setToggle} />
+              <HamburgerMenu />
 
               <ul
                 className={`flex ml-auto items-center sm:items-baseline sm:p-0 ${
@@ -73,7 +75,7 @@ function Header({ toggle, setToggle }) {
                     </li>
                   ) : null,
                 )}
-                {authStatus && <LogoutBtn toggle={toggle} />}
+                {authStatus && <LogoutBtn />}
               </ul>
             </div>
           </nav>

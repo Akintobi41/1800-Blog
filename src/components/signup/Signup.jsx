@@ -10,6 +10,7 @@ import Button from "../button/Button";
 import Input from "../input/Input";
 import Logo from "../logo/Logo";
 import Title from "../title/Title";
+import ButtonLoader from "../button/ButtonLoader";
 
 function Signup() {
   const navigate = useNavigate();
@@ -18,16 +19,15 @@ function Signup() {
   const { register, handleSubmit, watch, formState } = useForm();
   const watchAllFields = watch(); // when pass nothing as argument, you are watching everything
   const { errors } = formState;
-  const { name, email, password } = errors;
+  const { name } = errors;
   const { setToggle } = useContext(MyContext);
   const [disabled, setDisabled] = useState(false);
+  const [loading, setLoading] = useState(null);
 
   const create = async (data) => {
-    console.log(data);
-    console.log("is button disabled");
     setError(""); // for resetting the error on to the initial state
     setDisabled(true);
-    console.log(disabled);
+    setLoading(true);
 
     try {
       const userData = await authService.createAccount(data);
@@ -40,20 +40,13 @@ function Signup() {
       setError(error.message);
     } finally {
       setDisabled(false);
-      console.log(disabled, "disabled");
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     setToggle(false);
   }, []);
-  // useEffect(() => {
-  //   const sub = watch(
-  //     (value, { name, type }) =>
-  //       // console.log(value, name, type),l'dj
-  //       "fk",
-  //   );
-  // }, [handleSubmit]);
 
   return (
     <div className="flex items-center justify-center px-6">
@@ -66,7 +59,14 @@ function Signup() {
         <h6 className="text-center text-2xl font-[500] leading-tight">
           Sign up to <Title />
         </h6>
-        {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+        <div className="h-[1.5rem] mt-4 ">
+          {error && (
+            <p className="text-[.8rem] text-red-600 text-center h-full ">
+              {error}
+            </p>
+          )}
+        </div>
+
         <form onSubmit={handleSubmit(create)} className="mt-8" noValidate>
           <div className="">
             <Input
@@ -107,13 +107,10 @@ function Signup() {
               className="w-full relative mt-10"
               bgColor={"bg-[#abf600]"}
               textColor={"text-black"}
-              disabled={disabled}
+              disabled={loading}
+              loading={loading}
             >
-              {disabled ? (
-                <div className="absolute w-6 h-6 rounded-[50%] border-4 border-r-[4px] border-r-[green] border-[rgba(128,128,128,.7)] animate-spin"></div>
-              ) : (
-                "Create Account"
-              )}
+              Create Account
             </Button>
           </div>
           <div className="text-[.7rem] text-center mt-4">

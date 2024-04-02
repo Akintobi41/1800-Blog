@@ -28,7 +28,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <MyContext.Provider value={{ setToggle }}>
+      <MyContext.Provider value={{ toggle, setToggle }}>
         {!loading && (
           <div
             className={`  ${

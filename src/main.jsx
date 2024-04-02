@@ -17,6 +17,9 @@ import Post from "./pages/post/Post.jsx";
 import Signup from "./pages/signup/Signup";
 import store from "./store/store.js";
 import "./index.css";
+// import { library } from "@fortawesome/fontawesome-svg-core";
+// import { all } from "@fortawesome/free-brands-svg-icons";
+// library.add(...all);
 
 const router = createBrowserRouter([
   {
