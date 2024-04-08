@@ -9,7 +9,6 @@ import {
 import App from "./App.jsx";
 import Protected from "./components/authLayout/AuthLayout.jsx";
 import AddPost from "./pages/addPost/AddPost.jsx";
-import AllPost from "./pages/allPost/AllPost.jsx";
 import EditPost from "./pages/editPost/EditPost.jsx";
 import Home from "./pages/home/Home.jsx";
 import Login from "./pages/login/Login.jsx";
@@ -17,9 +16,6 @@ import Post from "./pages/post/Post.jsx";
 import Signup from "./pages/signup/Signup";
 import store from "./store/store.js";
 import "./index.css";
-// import { library } from "@fortawesome/fontawesome-svg-core";
-// import { all } from "@fortawesome/free-brands-svg-icons";
-// library.add(...all);
 
 const router = createBrowserRouter([
   {

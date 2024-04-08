@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useCallback, useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -9,19 +9,26 @@ import Input from "../input/Input";
 import RTE from "../rte/RTE";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function PostForm({ post }) {
-  // const element = <FontAwesomeIcon icon="fa-solid fa-upload" />;
   // postForm will be accepting a post
-  const { register, handleSubmit, watch, setValue, control, getValues } =
-    useForm({
-      defaultValues: {
-        title: post?.title || "",
-        slug: post?.slug || "",
-        content: post?.content || "",
-      },
-    });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState,
+    setValue,
+    control,
+    getValues,
+  } = useForm({
+    defaultValues: {
+      title: post?.title || "",
+      slug: post?.slug || "",
+      content: post?.content || "",
+    },
+  });
+  const { errors } = formState;
+  console.log(errors);
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData); // accessing the store
   const [loading, setLoading] = useState(null);
@@ -31,16 +38,20 @@ function PostForm({ post }) {
   const [caption, setCaption] = useState("");
 
   const submit = async (data) => {
+    console.log("form run");
+    // i have not uploaded image, any error message
+    console.log(data);
     setLoading(true);
     setDisabled(true);
     if (post) {
-      const file = data.image[0]
+      const file = data.image[0] //
         ? await appwriteService.uploadFile(data.image[0])
         : null;
 
       if (file) {
         appwriteService.deleteFile(post.featuredImage);
       }
+
       const dbPost = await appwriteService.updatePost(post.$id, {
         ...data,
         featuredImage: file ? file.$slug : undefined,
@@ -55,12 +66,17 @@ function PostForm({ post }) {
       if (file) {
         const fileId = file.$id;
         data.featuredImage = fileId;
-        const dbPost = await appwriteService.createPost({
-          ...data,
-          userId: userData.$id,
-        });
-        if (dbPost) {
-          navigate(`/post/${dbPost.$id}`);
+        try {
+          const dbPost = await appwriteService.createPost({
+            ...data,
+            userId: userData.$id,
+          });
+          console.log(dbPost);
+          if (dbPost) {
+            navigate(`/post/${dbPost.$id}`);
+          }
+        } catch (error) {
+          console.log(error);
         }
       }
     }
@@ -68,36 +84,46 @@ function PostForm({ post }) {
     setDisabled(false);
   };
 
-  const slugTransform = useCallback((value) => {
-    if (value && typeof value === "string")
-      return value
-        .trim()
-        .toLowerCase()
-        .replace(/[^a-zA-Z\d\s]+g/, "-")
-        .replace(/\s/g, "-");
-  }, []);
+  // const slugTransform = useCallback((value) => {
+  //   if (value && typeof value === "string")
+  //     return value
+  //       .trim()
+  //       .toLowerCase()
+  //       .replace(/[^a-zA-Z\d\s]+g/, "-")
+  //       .replace(/\s/g, "-");
+  // }, []);
 
-  useEffect(() => {
-    watch((value, { name }) => {
-      if (name === "title") {
-        setValue("slug", slugTransform(value.title), { shouldValidate: true });
-      }
-    });
-  }, [watch, slugTransform, setValue]);
+  // useEffect(() => {
+  //   watch((value, { name }) => {
+  //     if (name === "title") {
+  //       setValue("slug", slugTransform(value.title), { shouldValidate: true });
+  //     }
+  //   });
+  // }, [watch, slugTransform, setValue]);
 
   function fileUpload(e) {
-    let reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
+    const reader = new FileReader();
+    const img = e.target.files[0];
+
+    // Ensure an image is selected
+    if (!img) {
+      setVal(null);
+      setCaption(null);
+      return; // Exit early if no image selected
+    }
+    // Read the selected image
     reader.onload = () => {
       setVal(reader.result);
+      setCaption(img.name);
     };
-    setCaption(e.target.files[0].name);
+    // Read the file as a data URL
+    reader.readAsDataURL(img);
   }
 
   return (
     <form
       onSubmit={handleSubmit(submit)}
-      className="w-full flex flex-wrap flex-col gap-y-4 mt-6 px-4 mb-4"
+      className="w-full sm:w-full flex flex-wrap flex-col gap-y-4 mt-6 px-4 mb-4"
     >
       <div className="flex items-center mb-6">
         <img
@@ -113,34 +139,39 @@ function PostForm({ post }) {
         <Input
           label="Title"
           placeholder="Title (20 characters please)"
-          className="mb-4 [max-]"
+          className={`mb-4 [max-] border-[1px] ${
+            errors.title &&
+            errors.title.type === "required" &&
+            "border-[red] border-[solid]"
+          }`}
           maxLength="20"
           {...register("title", { required: true })}
         />
+        <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-[.8rem]">
+          {errors.title && errors.title.type === "required" && (
+            <span>blog title is required*</span>
+          )}
+        </div>
 
-        <Input
-          label="Slug :"
-          placeholder="Slug"
-          className="mb-4"
-          {...register("slug", { required: true })}
-          onInput={(e) => {
-            setValue("slug", slugTransform(e.currentTarget.value), {
-              shouldValidate: true,
-            });
-          }}
-        />
         <RTE
           label="Content: "
           name="content"
           control={control}
           defaultValue={getValues("content")}
+          {...register("content", { required: true })}
         />
       </div>
       <div className="1/3 mt-12">
         <p className="mb-2">Featured Image:</p>
-        <figure className="">
-          <img src={val} alt="" className="w-[6rem] h-[6rem]" />
-          <figcaption id="file-name">{caption}</figcaption>
+        <figure>
+          <img
+            src={val}
+            alt=""
+            className="w-[5rem] h-[5rem] sm:w-[12rem] sm:h-[12rem] object-cover"
+          />
+          <figcaption id="file-name" className="h-[1.5rem]">
+            {caption}
+          </figcaption>
         </figure>
         <Input
           label={<FontAwesomeIcon icon={faFileUpload} className="mr-4" />}
@@ -153,6 +184,11 @@ function PostForm({ post }) {
           accept="image/png, image/jpg, image/jpeg"
           {...register("image", { required: !post })}
         />
+        <div className="-mt-6 mb-6 text-[.65rem] italic text-[red]">
+          {errors.image && errors.image.type === "required" && (
+            <span>Image is required*</span>
+          )}
+        </div>
         {post && (
           <div className="w-full mb-4">
             <img

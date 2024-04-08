@@ -15,6 +15,7 @@ function Post() {
 
   const [post, setPost] = useState();
   const { id } = useParams();
+  console.log(id);
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
   const isAuthor = post && userData ? post.userId === userData.$id : false;

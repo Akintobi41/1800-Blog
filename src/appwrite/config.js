@@ -17,8 +17,9 @@ export class AuthService {
 
   async getPost(slug) {
     try {
-      return await this.databases.getDocument(dataId, collectionId, slug);
+      return await this.databases.getDocument(dataId, collectionId, slug); // changed slug to ID.unique here
     } catch (error) {
+      console.log(error);
       ("Appwrite service :: getPost() :: ", error);
       return false;
     }
@@ -28,28 +29,29 @@ export class AuthService {
     try {
       return await this.databases.listDocuments(dataId, collectionId, queries);
     } catch (error) {
+      console.log(error);
       ("Appwrite service :: getPosts() :: ", error);
       return false;
     }
   }
-  async createPost({ title, slug, content, featuredImage, userId, status }) {
+  async createPost({ title, content, featuredImage, status }) {// removed userId here
 
     try {
-      return await this.databases.createDocument(dataId, collectionId, slug, {
+      return await this.databases.createDocument(dataId, collectionId, ID.unique(), { // removed slug from here
         title,
         content,
         status,
         featuredImage,
-        userId,
       });
     } catch (error) {
       ("Appwrite service :: createPost() :: ", error);
+      console.log(error)
       return false;
     }
   }
 
   async updatePost(slug, { title, content, featuredImage, status }) {
-    (slug)
+
     try {
       return await this.databases.updateDocument(dataId, collectionId, slug, {
         title,

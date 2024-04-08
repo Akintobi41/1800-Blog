@@ -16,7 +16,6 @@ function Home({ authentication }) {
   const { data, isLoading } = useQuery({
     queryKey: ["data"],
     queryFn: () => appwriteService.getPosts([]),
-    staleTime: 60000,
   });
   const { setToggle } = useContext(MyContext);
   const posts = data?.documents;
@@ -25,7 +24,6 @@ function Home({ authentication }) {
   useEffect(() => {
     setToggle(false);
   }, []);
-
   return (
     <>
       {isLoading ? (
@@ -34,9 +32,11 @@ function Home({ authentication }) {
         <div className="w-full py-8">
           {authStatus ? (
             <>
-              <h2 className="text-xl font-bold px-4">Latest News</h2>
               <Container>
                 <div className="flex flex-wrap p-4 justify-center w-full gap-y-[3rem] xs:gap-x-[1rem]">
+                  {posts.length > 0 && (
+                    <h2 className="text-xl font-bold px-4">Latest Blogs</h2>
+                  )}
                   {posts?.map((post) => (
                     <div
                       className="w-full xs:w-[47%] s-lg:w-[32%]"
@@ -44,11 +44,17 @@ function Home({ authentication }) {
                     >
                       <PostCard {...post} />
                     </div>
-                  )) || (
-                    <p>
-                      Exciting post you would like to share, let{`'`}s begin
-                    </p>
-                  )}{" "}
+                  ))}
+                  {!posts ||
+                    (posts.length === 0 && (
+                      <p>
+                        Exciting post you would like to share,{" "}
+                        <Link to="/add-post" className="italic">
+                          {" "}
+                          let{`'`}s begin
+                        </Link>
+                      </p>
+                    ))}{" "}
                 </div>
               </Container>
             </>

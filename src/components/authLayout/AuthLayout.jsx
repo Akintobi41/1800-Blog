@@ -31,7 +31,7 @@ function Protected({ children, authentication = true }) {
   ) : (
     <>
       <div className="sm:flex justify-between m-auto max-w-[1500px]">
-        <div className="sm:bg-[url('./background/br-org.jpg')] bg-[#abf600] hidden bg-cover sm:w-[55%]  sm:flex"></div>
+        <div className="sm:bg-[url('./background/br-org.jpg')] bg-[#abf600] w-[45%] hidden bg-cover sm:flex"></div>
         {children}
       </div>
     </>

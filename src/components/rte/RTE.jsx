@@ -4,8 +4,15 @@ import { Editor } from "@tinymce/tinymce-react";
 
 function RTE({ name, control, label, defaultValue = "" }) {
   const api_Key = import.meta.env.VITE_APP_TINY_MCE;
+  // {
+  //   'md': '768px',
+  //     's-lg': '900px',
+  //       'lg': '1024px',
+  //         'xl': '1280px',
+  //           '2xl': '1536px'
+  // }
   return (
-    <div className="w-full h-[30rem]">
+    <div className="w-[100%] h-[30rem]">
       {label && <label className="inline-block mb-1 pl-1"> {label}</label>}
       <Controller
         name={name || "content"}
