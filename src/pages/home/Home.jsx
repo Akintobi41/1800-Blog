@@ -7,10 +7,11 @@ import Container from "./../../components/container/Container";
 import PostCard from "./../../components/postCard/PostCard";
 import { useQuery } from "@tanstack/react-query";
 import appwriteService from "../../appwrite/config";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MyContext } from "./../../MyContext";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Button from "../../components/button/Button";
 
 function Home({ authentication }) {
   const { data, isLoading } = useQuery({
@@ -20,26 +21,33 @@ function Home({ authentication }) {
   const { setToggle } = useContext(MyContext);
   const posts = data?.documents;
   const authStatus = useSelector((state) => state.auth.status);
+  const postPerSlide = 4;
+  const [next, setNext] = useState(postPerSlide);
 
   useEffect(() => {
     setToggle(false);
   }, []);
+
+  function handleMorePosts() {
+    setNext(next + postPerSlide);
+  }
+
   return (
     <>
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="w-full py-8">
+        <div className="w-full pb-8">
           {authStatus ? (
             <>
+              {posts?.length > 0 && (
+                <h2 className="text-xl font-bold px-4 pt-8">Latest Blogs</h2>
+              )}
               <Container>
-                <div className="flex flex-wrap p-4 justify-center w-full gap-y-[3rem] xs:gap-x-[1rem]">
-                  {posts.length > 0 && (
-                    <h2 className="text-xl font-bold px-4">Latest Blogs</h2>
-                  )}
-                  {posts?.map((post) => (
+                <div className="flex flex-wrap px-4 mt-6 justify-center w-full gap-y-[3rem] xs:gap-x-[1rem]">
+                  {posts?.slice(0, next)?.map((post) => (
                     <div
-                      className="w-full xs:w-[47%] s-lg:w-[32%]"
+                      className="w-full xs:w-[48%] s-lg:w-[32%]"
                       key={post.$id}
                     >
                       <PostCard {...post} />
@@ -71,6 +79,14 @@ function Home({ authentication }) {
                 📖💻
               </h1>
             </Container>
+          )}
+          {next < posts?.length && (
+            <p
+              className="mt-4 text-center cursor-pointer text-[var(--secondary-color)]"
+              onClick={handleMorePosts}
+            >
+              Load more
+            </p>
           )}
         </div>
       )}

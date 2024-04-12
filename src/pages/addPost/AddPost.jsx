@@ -11,9 +11,12 @@ function AddPost() {
   }, []);
 
   return (
-    <div className="w-full sm:w-[52%] max-w-[900px] m-auto">
-      <PostForm />
-    </div>
+    <>
+      <div className="sm:bg-[url('./background/br-org.jpg')] bg-[#abf600] w-[45%] hidden bg-cover sm:flex"></div>
+      <div className="w-full sm:w-[52%] max-w-[900px] m-auto">
+        <PostForm />
+      </div>
+    </>
   );
 }
 

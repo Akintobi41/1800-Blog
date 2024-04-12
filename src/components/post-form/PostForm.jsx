@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -12,15 +12,7 @@ import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 
 function PostForm({ post }) {
   // postForm will be accepting a post
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState,
-    setValue,
-    control,
-    getValues,
-  } = useForm({
+  const { register, handleSubmit, formState, control, getValues } = useForm({
     defaultValues: {
       title: post?.title || "",
       slug: post?.slug || "",
@@ -28,7 +20,6 @@ function PostForm({ post }) {
     },
   });
   const { errors } = formState;
-  console.log(errors);
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData); // accessing the store
   const [loading, setLoading] = useState(null);
@@ -38,9 +29,6 @@ function PostForm({ post }) {
   const [caption, setCaption] = useState("");
 
   const submit = async (data) => {
-    console.log("form run");
-    // i have not uploaded image, any error message
-    console.log(data);
     setLoading(true);
     setDisabled(true);
     if (post) {
@@ -69,9 +57,9 @@ function PostForm({ post }) {
         try {
           const dbPost = await appwriteService.createPost({
             ...data,
+            name: userData.name,
             userId: userData.$id,
           });
-          console.log(dbPost);
           if (dbPost) {
             navigate(`/post/${dbPost.$id}`);
           }
@@ -83,23 +71,6 @@ function PostForm({ post }) {
     setLoading(false);
     setDisabled(false);
   };
-
-  // const slugTransform = useCallback((value) => {
-  //   if (value && typeof value === "string")
-  //     return value
-  //       .trim()
-  //       .toLowerCase()
-  //       .replace(/[^a-zA-Z\d\s]+g/, "-")
-  //       .replace(/\s/g, "-");
-  // }, []);
-
-  // useEffect(() => {
-  //   watch((value, { name }) => {
-  //     if (name === "title") {
-  //       setValue("slug", slugTransform(value.title), { shouldValidate: true });
-  //     }
-  //   });
-  // }, [watch, slugTransform, setValue]);
 
   function fileUpload(e) {
     const reader = new FileReader();
@@ -158,7 +129,6 @@ function PostForm({ post }) {
           name="content"
           control={control}
           defaultValue={getValues("content")}
-          {...register("content", { required: true })}
         />
       </div>
       <div className="1/3 mt-12">

@@ -4,7 +4,7 @@ import Logo from "../../components/logo/Logo";
 function Footer() {
   return (
     // hid the overflow on the section element
-    <section className="relative py-10 bg-[rgb(196,193,164)] border border-t-2 border-t-black">
+    <section className="relative py-10 bg-[var(--bg-color)] border border-t-2 border-t-black">
       {/* i removed z index, z-10 from below div */}
       <div className="relative mx-auto max-w-7xl px-4">
         <div className="-m-6 flex flex-wrap">
