@@ -26,7 +26,7 @@ function ConfirmDelete({
             className="w-[50%] bg-[#f66d6d] text-[white] py-1 px-2 rounded cursor-pointer flex items-center justify-center"
           >
             {disabled ? (
-              <ButtonLoader width="5" height="5" />
+              <ButtonLoader width="w-[5]" height="h-[5]" />
             ) : (
               "Yes,delete blog"
             )}{" "}
