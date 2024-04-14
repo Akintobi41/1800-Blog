@@ -11,7 +11,6 @@ import { useContext, useEffect, useState } from "react";
 import { MyContext } from "./../../MyContext";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Button from "../../components/button/Button";
 
 function Home({ authentication }) {
   const { data, isLoading } = useQuery({
@@ -21,7 +20,7 @@ function Home({ authentication }) {
   const { setToggle } = useContext(MyContext);
   const posts = data?.documents;
   const authStatus = useSelector((state) => state.auth.status);
-  const postPerSlide = 4;
+  const postPerSlide = 6;
   const [next, setNext] = useState(postPerSlide);
 
   useEffect(() => {
@@ -31,6 +30,10 @@ function Home({ authentication }) {
   function handleMorePosts() {
     setNext(next + postPerSlide);
   }
+
+  const sortedPosts = posts?.sort((a, b) =>
+    a.$createdAt < b.$createdAt ? 1 : -1,
+  );
 
   return (
     <>
@@ -45,7 +48,7 @@ function Home({ authentication }) {
               )}
               <Container>
                 <div className="flex flex-wrap px-4 mt-6 justify-center w-full gap-y-[3rem] xs:gap-x-[1rem]">
-                  {posts?.slice(0, next)?.map((post) => (
+                  {sortedPosts?.slice(0, next)?.map((post) => (
                     <div
                       className="w-full xs:w-[48%] s-lg:w-[32%]"
                       key={post.$id}
@@ -68,7 +71,7 @@ function Home({ authentication }) {
             </>
           ) : (
             <Container>
-              <h1 className="text-[18px] p-6 italic">
+              <h1 className="text-[18px] p-6 italic text-center max-w-[400px]">
                 {" "}
                 Already a member? Welcome back!{" "}
                 <Link to="/login" className="hover:underline">
@@ -82,10 +85,15 @@ function Home({ authentication }) {
           )}
           {next < posts?.length && (
             <p
-              className="mt-4 text-center cursor-pointer text-[var(--secondary-color)]"
+              className="flex justify-center font-bold mt-4 text-center cursor-pointer text-[var(--secondary-color)]"
               onClick={handleMorePosts}
             >
-              Load more
+              Load more{" "}
+              <img
+                src="/Icons/down-arrow.png"
+                alt="load-more"
+                className="w-5 h-5 mt-[.4rem] ml-[.2rem]"
+              />
             </p>
           )}
         </div>

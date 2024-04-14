@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import appwriteService from "../../appwrite/config";
-import Container from "./../../components/container/Container";
 import PostForm from "./../../components/post-form/PostForm";
+import BackgroundContainer from "./../../components/backgroundContainer/BackgroundContainer";
 
 function EditPost() {
   const [post, setPost] = useState(null);
@@ -22,10 +22,11 @@ function EditPost() {
   }, [id, navigate]);
 
   return (
-    <div className="py-7">
-      <Container>
+    <div className="py-7 sm:py-0">
+      <BackgroundContainer />
+      <div className="w-full sm:w-[52%] max-w-[900px] m-auto">
         <PostForm post={post} />
-      </Container>
+      </div>
     </div>
   );
 }

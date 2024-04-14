@@ -94,11 +94,11 @@ function PostForm({ post }) {
   return (
     <form
       onSubmit={handleSubmit(submit)}
-      className="w-full sm:w-full flex flex-wrap flex-col gap-y-4 mt-6 px-4 mb-4"
+      className="w-full sm:w-full sm:pr-0 flex flex-wrap flex-col gap-y-4 mt-6 sm:px-4 mb-4"
     >
       <div className="flex items-center mb-6">
         <img
-          src="Icons/icons8-back-arrow-50.png"
+          src="/Icons/icons8-back-arrow-50.png"
           alt="go-back"
           className="w-4 h-4 cursor-pointer"
           onClick={() => navigate("/")}

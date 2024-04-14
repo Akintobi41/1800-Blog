@@ -2,6 +2,7 @@
 import PostForm from "./../../components/post-form/PostForm";
 import { MyContext } from "../../MyContext";
 import { useContext, useEffect } from "react";
+import BackgroundContainer from "./../../components/backgroundContainer/BackgroundContainer";
 
 function AddPost() {
   const { setToggle } = useContext(MyContext);
@@ -11,12 +12,12 @@ function AddPost() {
   }, []);
 
   return (
-    <>
-      <div className="sm:bg-[url('./background/br-org.jpg')] bg-[#abf600] w-[45%] hidden bg-cover sm:flex"></div>
-      <div className="w-full sm:w-[52%] max-w-[900px] m-auto">
+    <div className="w-full flex pr-4">
+      <BackgroundContainer />
+      <div className="w-full sm:w-[54%] h-full">
         <PostForm />
       </div>
-    </>
+    </div>
   );
 }
 

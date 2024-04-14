@@ -53,9 +53,9 @@ function Login() {
           Sign in to <Title />
         </h2>
 
-        {error && (
-          <p className="text-red-600 mt-8 text-center h-[.5rem]">{error}</p>
-        )}
+        <p className="text-red-600 mt-8 text-center h-[1.5rem]">
+          {error ? error : ""}
+        </p>
         <form onSubmit={handleSubmit(login)} className="mt-8 w-full">
           <div className="space-y-5 w-full">
             <Input
@@ -82,7 +82,7 @@ function Login() {
               {disabled ? <ButtonLoader /> : "Sign in"}{" "}
             </Button>
           </div>
-          <p className="mt-2 text-center text-base text-black/60">
+          <p className="mt-2 text-center text-base text-black/60 text-[.7rem]">
             Don&apos;t have any account?&nbsp;
             <Link
               to="/signup"

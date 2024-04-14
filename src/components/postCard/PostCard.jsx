@@ -7,7 +7,7 @@ function PostCard({ $id, title, featuredImage, content, $createdAt }) {
   const date_created = new Date($createdAt).toDateString();
   return (
     <Link to={`/post/${$id}`}>
-      <div className="max-w-full w-full overflow-hidden shadow-sm h-[20rem] border-b-[1px] rounded-xl">
+      <div className="max-w-full w-full overflow-hidden shadow-sm h-[20rem] border-[1px] rounded-xl">
         <div className="w-full mb-4 h-[12rem]">
           <img
             src={appwriteService.getFilePreview(featuredImage)}
@@ -20,7 +20,7 @@ function PostCard({ $id, title, featuredImage, content, $createdAt }) {
         </div>
         <h2 className="text-xl font-bold px-2">{title}</h2>
 
-        <div className="whitespace-wrap overflow-hidden text-ellipsis px-2 w-full text-[.7rem]">
+        <div className="whitespace-wrap overflow-hidden text-ellipsis py-4 px-2 w-full text-[.7rem]">
           {parse(content)}
         </div>
       </div>
