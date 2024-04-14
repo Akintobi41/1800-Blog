@@ -154,7 +154,7 @@ function PostForm({ post }) {
           accept="image/png, image/jpg, image/jpeg"
           {...register("image", { required: !post })}
         />
-        <div className="-mt-6 mb-6 text-[.65rem] italic text-[red]">
+        <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-3">
           {errors.image && errors.image.type === "required" && (
             <span>Image is required*</span>
           )}
