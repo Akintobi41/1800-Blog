@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import Logo from "../../components/logo/Logo";
 
 function Footer() {
+  const year = new Date().getFullYear();
   return (
     // hid the overflow on the section element
     <section className="relative py-10 bg-[var(--bg-color)] border border-t-2 border-t-black">
-      {/* i removed z index, z-10 from below div */}
       <div className="relative mx-auto max-w-7xl px-4">
         <div className="-m-6 flex flex-wrap">
           <div className="w-full p-6 md:w-1/2 lg:w-5/12">
@@ -15,7 +15,7 @@ function Footer() {
               </div>
               <div>
                 <p className="text-sm text-gray-600">
-                  &copy; Copyright 2023. All Rights Reserved by DevUI.
+                  &copy; Copyright {year}. All Rights Reserved by DevUI.
                 </p>
               </div>
             </div>
