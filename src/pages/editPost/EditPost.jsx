@@ -22,7 +22,7 @@ function EditPost() {
   }, [id, navigate]);
 
   return (
-    <div className="py-7 sm:py-0">
+    <div className="flex w-full py-7 px-4 sm:py-0 sm:pl-0">
       <BackgroundContainer />
       <div className="w-full sm:w-[52%] max-w-[900px] m-auto">
         <PostForm post={post} />

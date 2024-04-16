@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,24 +11,45 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 
 function PostForm({ post }) {
+  console.log(post);
   // postForm will be accepting a post
-  const { register, handleSubmit, formState, control, getValues } = useForm({
+  const [val, setVal] = useState(null);
+
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState,
+    control,
+    setValue,
+    getValues,
+    // reset,
+  } = useForm({
     defaultValues: {
       title: post?.title || "",
-      slug: post?.slug || "",
       content: post?.content || "",
+      // featuredImage: post?.image || val,
+      image: post?.featuredImage || val,
     },
   });
+  console.log(post?.title);
   const { errors } = formState;
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData); // accessing the store
   const [loading, setLoading] = useState(null);
   const [disabled, setDisabled] = useState(false);
 
-  const [val, setVal] = useState(null);
   const [caption, setCaption] = useState("");
+  const watchImage = watch(["image"]);
+
+  // useEffect(() => {
+  //   // console.log(val);
+
+  //   const subscription = watch((value, { name, type }) => console.log(val));
+  // }, [watch]);
 
   const submit = async (data) => {
+    console.log(data);
     setLoading(true);
     setDisabled(true);
     if (post) {
@@ -73,23 +94,36 @@ function PostForm({ post }) {
   };
 
   function fileUpload(e) {
+    console.log("onchange");
     const reader = new FileReader();
     const img = e.target.files[0];
 
-    // Ensure an image is selected
     if (!img) {
-      setVal(null);
-      setCaption(null);
       return; // Exit early if no image selected
     }
+    // Ensure an image is selected
+
     // Read the selected image
     reader.onload = () => {
       setVal(reader.result);
       setCaption(img.name);
     };
+    reader.onabort = () => {
+      console.log(val);
+
+      console.log("it was aborted");
+    };
     // Read the file as a data URL
     reader.readAsDataURL(img);
   }
+
+  // React.useEffect(() => {
+  //     watch((value, {name}) => {
+  //         if (name === "title") {
+  //             setValue("slug", slugTransform(value.title), {shouldValidate: true})
+  //         }
+  //     })
+  // }, [watch, slugTransform, setValue])
 
   return (
     <form
@@ -105,7 +139,7 @@ function PostForm({ post }) {
         />
         <span className="px-2 font-bold text-[.85rem]">Posts</span>
       </div>
-      <p className="font-bold">Create a Post</p>
+      <p className="font-bold">{!post ? "Create a Post" : "Edit Post"}</p>
       <div className="w-full">
         <Input
           label="Title"
@@ -117,6 +151,7 @@ function PostForm({ post }) {
           }`}
           maxLength="20"
           {...register("title", { required: true })}
+          // defaultValues={defaultValues}
         />
         <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-[.8rem]">
           {errors.title && errors.title.type === "required" && (
@@ -135,7 +170,10 @@ function PostForm({ post }) {
         <p className="mb-2">Featured Image:</p>
         <figure>
           <img
-            src={val}
+            src={
+              val ||
+              (post && appwriteService.getFilePreview(post.featuredImage))
+            }
             alt=""
             className="w-[5rem] h-[5rem] sm:w-[12rem] sm:h-[12rem] object-cover"
           />
@@ -153,21 +191,26 @@ function PostForm({ post }) {
           }}
           accept="image/png, image/jpg, image/jpeg"
           {...register("image", { required: !post })}
+          onClick={() => {
+            const w = getValues();
+            console.log(w);
+            setValue("image", w);
+          }}
         />
         <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-3">
           {errors.image && errors.image.type === "required" && (
             <span>Image is required*</span>
           )}
         </div>
-        {post && (
+        {/* {post && (
           <div className="w-full mb-4">
             <img
-              src={appwriteService.getFilePreview(post.featuredImage)}
+              src={val || appwriteService.getFilePreview(post.featuredImage)}
               alt={post.title}
               className="rounded-lg"
             />
           </div>
-        )}
+        )} */}
 
         <Button
           type="submit"

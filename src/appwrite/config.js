@@ -17,7 +17,7 @@ export class AuthService {
 
   async getPost(slug) {
     try {
-      return await this.databases.getDocument(dataId, collectionId, slug); // changed slug to ID.unique here
+      return await this.databases.getDocument(dataId, collectionId, slug);
     } catch (error) {
       console.log(error);
       ("Appwrite service :: getPost() :: ", error);
