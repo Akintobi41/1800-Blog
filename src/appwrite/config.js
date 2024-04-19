@@ -19,7 +19,6 @@ export class AuthService {
     try {
       return await this.databases.getDocument(dataId, collectionId, slug);
     } catch (error) {
-      console.log(error);
       ("Appwrite service :: getPost() :: ", error);
       return false;
     }
@@ -29,7 +28,6 @@ export class AuthService {
     try {
       return await this.databases.listDocuments(dataId, collectionId, queries);
     } catch (error) {
-      console.log(error);
       ("Appwrite service :: getPosts() :: ", error);
       return false;
     }
@@ -45,7 +43,6 @@ export class AuthService {
       });
     } catch (error) {
       ("Appwrite service :: createPost() :: ", error);
-      console.log(error)
       return false;
     }
   }

@@ -123,7 +123,7 @@ function Signup() {
             <p className="mt-4">
               Already signed up?{" "}
               <Link to={"/login"} className="italic hover:underline">
-                Sign in
+                Log in
               </Link>
             </p>
           </div>

@@ -9,12 +9,6 @@ import EditDeleteIcon from "./../../components/editDeleteIcon/EditDeleteIcon";
 import Loader from "../../components/loader/Loader";
 
 function Post() {
-  // The way in which the application was built is that
-  // Tiny MCE saves as pure HTML into your  database and if you bring your pure HTML in to react, there would be errors that is the reason why we are using a react package called html-react-parser
-  // up next we grab our userData from the store with the help of the useSelector
-  // up next was to verify if the post was actually written by you or not
-  // up next was to create a function that is responsible for deleting posts
-
   const [post, setPost] = useState();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -45,7 +39,6 @@ function Post() {
   //   });
   // };
   const updatedDate = new Date(post?.$updatedAt);
-
   // function confirmDelete() {
   //   return (
   //     <div>

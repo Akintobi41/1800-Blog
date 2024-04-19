@@ -11,6 +11,7 @@ import { useContext, useEffect, useState } from "react";
 import { MyContext } from "./../../MyContext";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Button from "../../components/button/Button";
 
 function Home({ authentication }) {
   const { data, isLoading } = useQuery({
@@ -27,12 +28,14 @@ function Home({ authentication }) {
     setToggle(false);
   }, []);
 
+  console.log(data);
+
   function handleMorePosts() {
     setNext(next + postPerSlide);
   }
 
   const sortedPosts = posts?.sort((a, b) =>
-    a.$createdAt < b.$createdAt ? 1 : -1,
+    a.$updatedAt < b.$updatedAt ? 1 : -1,
   );
 
   return (
@@ -71,15 +74,27 @@ function Home({ authentication }) {
             </>
           ) : (
             <Container>
-              <h1 className="text-[18px] p-6 italic text-center max-w-[400px]">
+              <h1 className=" flex flex-col justify-center s-lg:text-[86px] sm:text-[54px] sm:max-w-full leading-[50px] font-bold p-6 italic min-h-[350px] text-left px-4">
                 {" "}
-                Already a member? Welcome back!{" "}
-                <Link to="/login" className="hover:underline">
-                  {" "}
-                  Sign in now{" "}
-                </Link>{" "}
-                to discover what's new and explore topics that interest you.
-                📖💻
+                Discover what's new
+                <small className="block text-[20px] font-normal leading-8 mt-8">
+                  Explore topics that interest you.📖💻
+                </small>
+                <div className="flex align-center items-center font-medium mt-6">
+                  <Link to="/signup" className="">
+                    {" "}
+                    <Button className="text-[12px] s-lg:text-[16px] s-lg:h-10 h-8 px-2">
+                      Get started{" "}
+                    </Button>
+                  </Link>{" "}
+                  <Link
+                    to="/login"
+                    className="underline text-[12px] s-lg:text-[16px] ml-2"
+                  >
+                    {" "}
+                    Log in now{" "}
+                  </Link>{" "}
+                </div>
               </h1>
             </Container>
           )}

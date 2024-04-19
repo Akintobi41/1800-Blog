@@ -50,7 +50,7 @@ function Login() {
           </span>
         </div>
         <h2 className="text-center text-2xl font-[500] leading-tight">
-          Sign in to <Title />
+          Log in to <Title />
         </h2>
 
         <p className="text-red-600 mt-8 text-center h-[1.5rem]">
