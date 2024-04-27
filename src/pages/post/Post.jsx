@@ -77,7 +77,7 @@ function Post() {
           {post?.title}
         </p>
         <div className="flex justify-center sm:justify-start px-4 sm:px-0 text-[.55rem]">
-          <p> By {userData?.name}</p>
+          <div> </div>
           <p className="ml-8">Last updated: {updatedDate.toDateString()}</p>
         </div>
         {isAuthor && (

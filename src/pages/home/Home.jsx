@@ -28,8 +28,6 @@ function Home({ authentication }) {
     setToggle(false);
   }, []);
 
-  console.log(data);
-
   function handleMorePosts() {
     setNext(next + postPerSlide);
   }
@@ -47,7 +45,9 @@ function Home({ authentication }) {
           {authStatus ? (
             <>
               {posts?.length > 0 && (
-                <h2 className="text-xl font-bold px-4 pt-8">Latest Blogs</h2>
+                <h2 className="text-xl font-bold px-4 pt-8 max-w-[1500px] mx-auto">
+                  Latest Blogs
+                </h2>
               )}
               <Container>
                 <div className="flex flex-wrap px-4 mt-6 justify-center w-full gap-y-[3rem] xs:gap-x-[1rem]">
@@ -100,14 +100,14 @@ function Home({ authentication }) {
           )}
           {next < posts?.length && (
             <p
-              className="flex justify-center font-bold mt-4 text-center cursor-pointer text-[var(--secondary-color)]"
+              className="flex justify-center font-bold mt-4 text-center cursor-pointer text-[var(--black)]"
               onClick={handleMorePosts}
             >
               Load more{" "}
               <img
                 src="/Icons/down-arrow.png"
                 alt="load-more"
-                className="w-5 h-5 mt-[.4rem] ml-[.2rem]"
+                className="w-4 h-4 mt-[.4rem] ml-[.2rem]"
               />
             </p>
           )}

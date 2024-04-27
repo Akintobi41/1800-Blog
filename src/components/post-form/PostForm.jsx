@@ -11,28 +11,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 
 function PostForm({ post }) {
-  // console.log(post);
-  // postForm will be accepting a post
   const [val, setVal] = useState(null);
 
   const {
     register,
-    watch,
     handleSubmit,
     formState,
     control,
-    setValue,
     getValues,
-    // reset,
   } = useForm({
     defaultValues: {
       title: post?.title || "",
       content: post?.content || "",
-      // featuredImage: post?.image || val,
-      // image: post?.featuredImage || val,
     },
   });
-  // console.log(post?.title);
   const { errors } = formState;
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData); // accessing the store
@@ -40,25 +32,16 @@ function PostForm({ post }) {
   const [disabled, setDisabled] = useState(false);
 
   const [caption, setCaption] = useState("");
-  const watchImage = watch(["image"]);
 
-  // useEffect(() => {
-  //   // console.log(val);
-
-  //   const subscription = watch((value, { name, type }) => console.log(val));
-  // }, [watch]);
-
-  // console.log(post);
   const submit = async (data) => {
-    console.log(data);
+
     setLoading(true);
     setDisabled(true);
+    console.log(post);
     if (post) {
       const file = data?.image[0] //
         ? await appwriteService.uploadFile(data.image[0])
         : null;
-      console.log(post.featuredImage);
-      console.log(file);
       if (file) {
         appwriteService.deleteFile(post.featuredImage);
       }
@@ -67,32 +50,23 @@ function PostForm({ post }) {
         ...data,
         featuredImage: file ? file.$id : undefined,
       });
-      // console.log(file);
       if (dbPost) {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
-      console.log("no post ");
       const file = await appwriteService.uploadFile(data.image[0]);
-      // const fileName = await appwriteService.uploadFile(
-      //   data.featuredImage[0].name,
-      // );
-
-      // console.log(fileName);
-      console.log(file);
 
       if (file) {
         const fileId = file.$id;
         data.featuredImage = fileId;
         try {
-          const dbPost = await appwriteService.updatePost(fileId, {
+          const dbPost = await appwriteService.createPost({
             ...data,
             name: userData.name,
             userId: userData.$id,
           });
           console.log(dbPost);
           if (dbPost) {
-            console.log("e go work");
             navigate(`/post/${dbPost.$id}`);
           }
         } catch (error) {
@@ -127,7 +101,6 @@ function PostForm({ post }) {
     // Read the file as a data URL
     reader.readAsDataURL(img);
   }
-  // console.log(caption);
 
   return (
     <form
@@ -203,6 +176,10 @@ function PostForm({ post }) {
         <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-3">
           {errors.image && errors.image.type === "required" && (
             <span>Image is required*</span>
+          )}
+        </div> <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-3">
+          {errors.content && errors.content.type === "required" && (
+            <span>Content is required*</span>
           )}
         </div>
         {/* {post && (
