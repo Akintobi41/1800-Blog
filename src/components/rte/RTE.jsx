@@ -4,7 +4,6 @@ import { Editor } from "@tinymce/tinymce-react";
 
 function RTE({ name, control, label, defaultValue = "" }) {
   const api_Key = import.meta.env.VITE_APP_TINY_MCE;
-  console.log(api_Key);
 
   return (
     <div className="w-[100%] h-[30rem]">

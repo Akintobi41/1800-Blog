@@ -30,28 +30,11 @@ function Post() {
     }
   }, [id, navigate]);
 
-  // const deletePost = (post) => {
-  //   appwriteService.deletePost(post.$id).then((status) => {
-  //     if (status) {
-  //       appwriteService.deleteFile(post.featuredImage);
-  //       navigate("/");
-  //     }
-  //   });
-  // };
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+ 
   const updatedDate = new Date(post?.$updatedAt);
-  // function confirmDelete() {
-  //   return (
-  //     <div>
-  //       <p>Delete Blog?</p>
-
-  //       <p>All share links will be inaccessible.</p>
-  //       <p>This blog history will be destroyed.</p>
-
-  //       <button onClick={deletePost}>Yes, delete blog</button>
-  //       <button>No, keep it</button>
-  //     </div>
-  //   );
-  // }
 
   return post ? (
     <>

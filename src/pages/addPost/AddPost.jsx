@@ -12,7 +12,7 @@ function AddPost() {
   }, []);
 
   return (
-    <div className="w-full flex px-4 sm:p-0">
+    <div className="w-full flex px-4 sm:p-0 max-w-[2000px]">
       <BackgroundContainer />
       <div className="w-full sm:w-[54%] h-full">
         <PostForm />

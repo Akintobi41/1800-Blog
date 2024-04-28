@@ -45,12 +45,12 @@ function Home({ authentication }) {
           {authStatus ? (
             <>
               {posts?.length > 0 && (
-                <h2 className="text-xl font-bold px-4 pt-8 max-w-[1500px] mx-auto">
+                <h2 className="text-xl font-bold pt-8 max-w-[2000px] mx-4 sm:mx-auto">
                   Latest Blogs
                 </h2>
               )}
               <Container>
-                <div className="flex flex-wrap px-4 mt-6 justify-center w-full gap-y-[3rem] xs:gap-x-[1rem]">
+                <div className="flex flex-wrap px-4 mt-6 w-full gap-y-[3rem] xs:gap-x-[1rem]">
                   {sortedPosts?.slice(0, next)?.map((post) => (
                     <div
                       className="w-full xs:w-[48%] s-lg:w-[32%]"

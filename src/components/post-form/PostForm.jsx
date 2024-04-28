@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -7,39 +9,27 @@ import appwriteService from "../../appwrite/config";
 import Button from "../button/Button";
 import Input from "../input/Input";
 import RTE from "../rte/RTE";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 
 function PostForm({ post }) {
-  const [val, setVal] = useState(null);
-
-  const {
-    register,
-    handleSubmit,
-    formState,
-    control,
-    getValues,
-  } = useForm({
+  const userData = useSelector((state) => state.auth.userData); // accessing the store
+  const navigate = useNavigate();
+  const { register, handleSubmit, formState, control, getValues } = useForm({
     defaultValues: {
       title: post?.title || "",
       content: post?.content || "",
     },
   });
   const { errors } = formState;
-  const navigate = useNavigate();
-  const userData = useSelector((state) => state.auth.userData); // accessing the store
   const [loading, setLoading] = useState(null);
   const [disabled, setDisabled] = useState(false);
-
+  const [val, setVal] = useState(null);
   const [caption, setCaption] = useState("");
 
-  const submit = async (data) => {
-
+  async function submit(data) {
     setLoading(true);
     setDisabled(true);
-    console.log(post);
     if (post) {
-      const file = data?.image[0] //
+      const file = data?.image[0]
         ? await appwriteService.uploadFile(data.image[0])
         : null;
       if (file) {
@@ -76,27 +66,19 @@ function PostForm({ post }) {
     }
     setLoading(false);
     setDisabled(false);
-  };
+  }
 
-  function fileUpload(e) {
-    console.log("onchange");
+  function uploadImage(e) {
     const reader = new FileReader();
     const img = e.target.files[0];
 
     if (!img) {
       return; // Exit early if no image selected
     }
-    // Ensure an image is selected
-
     // Read the selected image
     reader.onload = () => {
       setVal(reader.result);
       setCaption(img.name);
-    };
-    reader.onabort = () => {
-      console.log(val);
-
-      console.log("it was aborted");
     };
     // Read the file as a data URL
     reader.readAsDataURL(img);
@@ -162,22 +144,28 @@ function PostForm({ post }) {
           type="file"
           id="img"
           className="mb-4"
-          onInput={(e) => {
-            fileUpload(e);
-          }}
-          accept="image/png, image/jpg, image/jpeg"
-          {...register("image", { required: !post })}
-          // onClick={() => {
-          //   // const w = getValues();
-          //   // console.log(w);
-          //   // setValue("image", w);
+          // onInput={(e) => {
+          //   setValue("image", fileUpload(e));
           // }}
+          // onClick={(e) => {
+          //   console.log(e);
+          // }}
+          src={
+            val || (post && appwriteService.getFilePreview(post.featuredImage))
+          }
+          accept="image/png, image/jpg, image/jpeg"
+          {...register(
+            "image",
+            { onChange: (e) => uploadImage(e) },
+            { required: !post },
+          )}
         />
         <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-3">
           {errors.image && errors.image.type === "required" && (
             <span>Image is required*</span>
           )}
-        </div> <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-3">
+        </div>{" "}
+        <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-3">
           {errors.content && errors.content.type === "required" && (
             <span>Content is required*</span>
           )}
@@ -191,7 +179,6 @@ function PostForm({ post }) {
             />
           </div>
         )} */}
-
         <Button
           type="submit"
           className="w-full"

@@ -24,7 +24,7 @@ function LogoutBtn() {
     <button
       className={`${
         toggle ? "inline-block" : "hidden"
-      }  sm:inline-block duration-200 hover:underline mt-4`}
+      }  sm:inline-block duration-200 hover:underline mt-4 sm:px-4`}
       onClick={logoutHandler}
     >
       {" "}

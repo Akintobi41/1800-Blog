@@ -50,7 +50,7 @@ function Header() {
           confirmed.status ? "opacity-[.05] -z-20" : "opacity-100 z-0"
         }`}
       >
-        <Container>
+        <div className="w-full m-auto flex justify-center max-w-[2000px]">
           <nav className="flex items-center justify-between w-full">
             <div className="mr-4">
               <Logo></Logo>
@@ -83,7 +83,7 @@ function Header() {
               </ul>
             </div>
           </nav>
-        </Container>
+        </div>
       </header>
     </>
   );
