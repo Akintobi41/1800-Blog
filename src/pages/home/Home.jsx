@@ -12,6 +12,7 @@ import Button from "../../components/button/Button";
 import Loader from "../../components/loader/Loader";
 import Container from "./../../components/container/Container";
 import PostCard from "./../../components/postCard/PostCard";
+import { sortData } from "./../../utils/sortData/sortData";
 
 function Home({ authentication }) {
   const { data, isLoading } = useQuery({
@@ -33,10 +34,6 @@ function Home({ authentication }) {
     setNext(next + postPerSlide);
   }
 
-  const sortedPosts = posts?.sort((a, b) =>
-    a.$updatedAt < b.$updatedAt ? 1 : -1,
-  ); // function for sorting data, move it to utils
-
   return (
     <>
       {isLoading ? (
@@ -52,14 +49,16 @@ function Home({ authentication }) {
               )}
               <Container>
                 <div className="flex flex-wrap px-4 mt-6 w-full gap-y-[3rem] xs:gap-x-[1rem]">
-                  {sortedPosts?.slice(0, next)?.map((post) => (
-                    <div
-                      className="w-full xs:w-[48%] s-lg:w-[32%]"
-                      key={post.$id}
-                    >
-                      <PostCard {...post} />
-                    </div>
-                  ))}
+                  {sortData(posts, "$updatedAt")
+                    .slice(0, next)
+                    ?.map((post) => (
+                      <div
+                        className="w-full xs:w-[48%] s-lg:w-[32%]"
+                        key={post.$id}
+                      >
+                        <PostCard {...post} />
+                      </div>
+                    ))}
                   {!posts ||
                     (posts.length === 0 && (
                       <p>
