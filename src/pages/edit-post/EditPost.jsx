@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import appwriteService from "../../appwrite/config";
-import PostForm from "./../../components/post-form/PostForm";
-import BackgroundContainer from "./../../components/backgroundContainer/BackgroundContainer";
+import PostForm from "../../components/post-form/PostForm";
+import BackgroundContainer from "../../components/backgroundContainer/BackgroundContainer";
 
 function EditPost() {
   const [post, setPost] = useState(null);

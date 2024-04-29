@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import PostForm from "./../../components/post-form/PostForm";
+import PostForm from "../../components/post-form/PostForm";
 import { MyContext } from "../../MyContext";
 import { useContext, useEffect } from "react";
-import BackgroundContainer from "./../../components/backgroundContainer/BackgroundContainer";
+import BackgroundContainer from "../../components/backgroundContainer/BackgroundContainer";
 
 function AddPost() {
   const { setToggle } = useContext(MyContext);

@@ -3,7 +3,7 @@ import { useContext, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../MyContext";
-import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
+import HamburgerMenu from "../hamburger-menu/HamburgerMenu";
 import Logo from "./../logo/Logo";
 import LogoutBtn from "./LogoutBtn";
 
