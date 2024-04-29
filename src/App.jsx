@@ -1,16 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { MyContext } from "./MyContext";
+import { login, logout } from "./store/authSlice";
 import authService from "./appwrite/auth";
+import appwriteService from "./appwrite/config";
+import ConfirmDelete from "./components/confirmDelete/ConfirmDelete";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header-logout/Header";
-import { login, logout } from "./store/authSlice";
-import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
-import ConfirmDelete from "./components/confirmDelete/ConfirmDelete";
-import appwriteService from "./appwrite/config";
-import { useNavigate } from "react-router-dom";
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
@@ -29,8 +28,6 @@ function App() {
       .finally(() => setLoading(false));
   }, []);
   const deletePost = (post) => {
-    // setDisabled(true);
-    console.log(post);
     appwriteService.deletePost(post?.$id).then((status) => {
       if (status) {
         appwriteService.deleteFile(post.featuredImage);

@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
-import Container from "./../container/Container";
+import { useContext, useRef } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { MyContext } from "../../MyContext";
+import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
 import Logo from "./../logo/Logo";
 import LogoutBtn from "./LogoutBtn";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
-import { useRef } from "react";
-import { MyContext } from "../../MyContext";
-import { useContext } from "react";
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status); // Check if the user is logged or not

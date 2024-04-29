@@ -28,6 +28,7 @@ function PostForm({ post }) {
   async function submit(data) {
     setLoading(true);
     setDisabled(true);
+    console.log(data)
     if (post) {
       const file = data?.image[0]
         ? await appwriteService.uploadFile(data.image[0])
@@ -55,7 +56,6 @@ function PostForm({ post }) {
             name: userData.name,
             userId: userData.$id,
           });
-          console.log(dbPost);
           if (dbPost) {
             navigate(`/post/${dbPost.$id}`);
           }
@@ -144,12 +144,6 @@ function PostForm({ post }) {
           type="file"
           id="img"
           className="mb-4"
-          // onInput={(e) => {
-          //   setValue("image", fileUpload(e));
-          // }}
-          // onClick={(e) => {
-          //   console.log(e);
-          // }}
           src={
             val || (post && appwriteService.getFilePreview(post.featuredImage))
           }
@@ -170,15 +164,6 @@ function PostForm({ post }) {
             <span>Content is required*</span>
           )}
         </div>
-        {/* {post && (
-          <div className="w-full mb-4">
-            <img
-              src={val || appwriteService.getFilePreview(post.featuredImage)}
-              alt={post.title}
-              className="rounded-lg"
-            />
-          </div>
-        )} */}
         <Button
           type="submit"
           className="w-full"

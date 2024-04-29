@@ -2,16 +2,16 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useQuery } from "@tanstack/react-query";
+import { useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { MyContext } from "./../../MyContext";
+import appwriteService from "../../appwrite/config";
+import Button from "../../components/button/Button";
 import Loader from "../../components/loader/Loader";
 import Container from "./../../components/container/Container";
 import PostCard from "./../../components/postCard/PostCard";
-import { useQuery } from "@tanstack/react-query";
-import appwriteService from "../../appwrite/config";
-import { useContext, useEffect, useState } from "react";
-import { MyContext } from "./../../MyContext";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import Button from "../../components/button/Button";
 
 function Home({ authentication }) {
   const { data, isLoading } = useQuery({
@@ -26,6 +26,7 @@ function Home({ authentication }) {
 
   useEffect(() => {
     setToggle(false);
+    window.scrollTo(0, 0);
   }, []);
 
   function handleMorePosts() {
@@ -34,7 +35,7 @@ function Home({ authentication }) {
 
   const sortedPosts = posts?.sort((a, b) =>
     a.$updatedAt < b.$updatedAt ? 1 : -1,
-  );
+  ); // function for sorting data, move it to utils
 
   return (
     <>
@@ -45,7 +46,7 @@ function Home({ authentication }) {
           {authStatus ? (
             <>
               {posts?.length > 0 && (
-                <h2 className="text-xl font-bold pt-8 max-w-[2000px] mx-4 sm:mx-auto">
+                <h2 className="text-xl font-bold pt-8 max-w-[2000px] px-4 mx-auto">
                   Latest Blogs
                 </h2>
               )}
