@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -13,12 +14,13 @@ import RTE from "../rte/RTE";
 function PostForm({ post }) {
   const userData = useSelector((state) => state.auth.userData); // accessing the store
   const navigate = useNavigate();
-  const { register, handleSubmit, formState, control, getValues } = useForm({
-    defaultValues: {
-      title: post?.title || "",
-      content: post?.content || "",
-    },
-  });
+  const { register, handleSubmit, formState, control, getValues, setValue } =
+    useForm({
+      defaultValues: {
+        title: post?.title || "",
+        content: post?.content || "",
+      },
+    });
   const { errors } = formState;
   const [loading, setLoading] = useState(null);
   const [disabled, setDisabled] = useState(false);
@@ -28,7 +30,6 @@ function PostForm({ post }) {
   async function submit(data) {
     setLoading(true);
     setDisabled(true);
-    console.log(data)
     if (post) {
       const file = data?.image[0]
         ? await appwriteService.uploadFile(data.image[0])
@@ -83,6 +84,11 @@ function PostForm({ post }) {
     // Read the file as a data URL
     reader.readAsDataURL(img);
   }
+
+  useEffect(() => {
+    post && setValue("title", post.title);
+    post && setValue("content", post.content);
+  }, [post]);
 
   return (
     <form

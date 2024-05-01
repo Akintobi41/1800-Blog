@@ -43,7 +43,7 @@ function Login() {
 
   return (
     <div className="flex items-center justify-center px-6">
-      <div className={`flex flex-col items-center mx-auto w-full max-w-lg`}>
+      <div className={`flex flex-col items-center mx-auto w-full`}>
         <div className="mb-2 flex justify-center">
           <span className="inline-block w-full max-w-[100px]">
             <Logo width="100%" />
@@ -88,7 +88,7 @@ function Login() {
               to="/signup"
               className="font-medium text-primary transition-all duration-200 hover:underline"
             >
-              Sign Up
+              Sign up
             </Link>
           </p>
         </form>
