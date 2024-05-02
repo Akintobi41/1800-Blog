@@ -1,11 +1,11 @@
-import { useEffect, useState, useContext } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import appwriteService from "../../appwrite/config";
-import Button from "./../../components/button/Button";
 import parse from "html-react-parser";
+import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { MyContext } from "../../MyContext";
+import Button from "./../../components/button/Button";
 import EditDeleteIcon from "./../../components/editDeleteIcon/EditDeleteIcon";
+import appwriteService from "../../appwrite/config";
 import Loader from "../../components/loader/Loader";
 
 function Post() {
