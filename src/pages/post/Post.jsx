@@ -1,12 +1,12 @@
-import { useEffect, useState, useContext } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import appwriteService from "../../appwrite/config";
-import Button from "./../../components/button/Button";
 import parse from "html-react-parser";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { MyContext } from "../../MyContext";
-import EditDeleteIcon from "./../../components/editDeleteIcon/EditDeleteIcon";
+import appwriteService from "../../appwrite/config";
 import Loader from "../../components/loader/Loader";
+import Button from "./../../components/button/Button";
+import EditDeleteIcon from "./../../components/editDeleteIcon/EditDeleteIcon";
 
 function Post() {
   const [post, setPost] = useState();
@@ -17,6 +17,14 @@ function Post() {
   const userId = permission?.match(/user:(.*?)"/)[1];
   const isAuthor = post && userData ? userId === userData.$id : false;
   const { confirmed, setConfirmed } = useContext(MyContext);
+  const share = [
+    "../../../public/Icons/twitter.svg",
+    "../../../public/Icons/telegram.svg",
+    "../../../public/Icons/facebook.svg",
+  ];
+
+  console.log(permission);
+  console.log(userId);
 
   useEffect(() => {
     if (id) {
@@ -49,26 +57,38 @@ function Post() {
             className="w-4 h-4 mr-[.8rem] cursor-pointer"
             onClick={() => navigate("/")}
           />
-          <p className="text-[.8rem] ">back</p>
+          <p className="text-[.8rem] sm:text-[1rem]">back</p>
         </Link>
-        <p className="hidden sm:block mx-4 mt-[8rem] text-[.6rem]">
+        <p className="hidden sm:block mx-4 mt-[8rem] text-[.6rem] sm:text-[1rem]">
           Last updated: {updatedDate.toDateString()}
         </p>
       </div>
       <div className="py-8 px-4 w-full max-w-[900px] m-auto">
-        <p className="sm:text-[2.5rem] sm:font-bold text-[2rem] font-medium text-center sm:text-left">
+        <p className="sm:text-[2.5rem] sm:font-bold text-[1.5rem] font-[600] text-center sm:text-left text-gray-500">
           {post?.title}
         </p>
-        <div className="flex justify-center sm:justify-start px-4 sm:px-0 text-[.55rem]">
-          <div> </div>
-          <p className="ml-8">Last updated: {updatedDate.toDateString()}</p>
+        <div className="flex justify-between gap-x-6  px-4 sm:px-0 text-[.55rem] sm:text-[1rem] mt-2">
+          <p className="">Last updated: {updatedDate.toDateString()}</p>
+          <div className="flex gap-x-4">
+            {" "}
+            {share.map((i) => (
+              <Fragment key={i}>
+                <img
+                  src={i}
+                  alt={i}
+                  className="w-4 h-4 sm:w-6 sm:h-6 cursor-pointer"
+                />
+              </Fragment>
+            ))}
+          </div>
         </div>
         {isAuthor && (
-          <div className="flex justify-end mt-2 pl-4 mb-4">
+          <div className="flex justify-end mt-12 pl-4 mb-4">
             <Link to={`/edit-post/${post.$id}`} className="block">
               <Button
                 bgColor="bg-[var(--bg-color)]"
-                className="text-[.65rem] h-[0] w-[5rem] pt-3 pb-3 py-0 px-0 ml-0 mr-0"
+                className="text-[.65rem] w-[4.5rem] pt-0 pb-0 py-0 px-0 ml-0 mr-0"
+                height={"h-[1.5rem]"}
               >
                 <EditDeleteIcon
                   src={"/Icons/edit.svg"}
@@ -88,14 +108,18 @@ function Post() {
           />
         </div>
         <div className="w-full mb-6">
-          <div className="browser-css px-4 sm:px-0 text-[.8rem]">
+          <div className="browser-css px-4 sm:px-0 text-[.8rem] sm:text-[1rem]">
             {parse(post.content)}
           </div>
         </div>
         {isAuthor && (
-          <div className="flex justify-end mt-2 border-t-[1px] border-solid border-[var(--bg-color)] pt-4">
+          <div className="flex justify-between mt-2 border-t-[1px] border-solid border-[var(--bg-color)] pt-4">
+            <div>
+              <p className="">Share</p>
+            </div>
             <Button
               bgColor="bg-red-500 text-[.65rem] h-[0] w-[5rem] pt-3 pb-3 py-0 px-0 ml-0 mr-0"
+              height={"h-[1.5rem]"}
               onClick={() =>
                 setConfirmed({ val: post, status: !confirmed.status })
               }
