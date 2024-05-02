@@ -1,11 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import {  useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { MyContext } from "../../MyContext";
-import { login } from "../../store/authSlice";
 import authService from "../../appwrite/auth";
+import { login } from "../../store/authSlice";
 import Button from "../button/Button";
 import Input from "../input/Input";
 import Logo from "../logo/Logo";
@@ -15,7 +15,7 @@ function Signup() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-  const { register, handleSubmit, watch, formState } = useForm();
+  const { register, handleSubmit,  formState } = useForm();
   const { errors } = formState;
   const { name } = errors;
   const { setToggle } = useContext(MyContext);

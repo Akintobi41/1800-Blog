@@ -5,8 +5,8 @@ function Signup() {
   return (
     <div className="w-full flex">
       {" "}
-      <BackgroundContainer />
-      <div className="py-7 sm:w-[52%] max-w-[900px] m-auto">
+      <BackgroundContainer h={"h-[640px]"} />
+      <div className="py-7 sm:w-[52%] max-w-[900px] my-0 mx-auto">
         <SignupComponent />
       </div>
     </div>

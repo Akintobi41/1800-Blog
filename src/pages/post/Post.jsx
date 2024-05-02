@@ -31,9 +31,9 @@ function Post() {
   }, [id, navigate]);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
- 
+    window.scrollTo(0, 0);
+  }, []);
+
   const updatedDate = new Date(post?.$updatedAt);
 
   return post ? (
@@ -93,7 +93,7 @@ function Post() {
           </div>
         </div>
         {isAuthor && (
-          <div className="flex justify-end mt-2 px-4 border-t-[1px] border-solid border-[var(--bg-color)] pt-4">
+          <div className="flex justify-end mt-2 border-t-[1px] border-solid border-[var(--bg-color)] pt-4">
             <Button
               bgColor="bg-red-500 text-[.65rem] h-[0] w-[5rem] pt-3 pb-3 py-0 px-0 ml-0 mr-0"
               onClick={() =>
