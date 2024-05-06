@@ -4,8 +4,9 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { MyContext } from "../../MyContext";
 import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
-import Logo from "./../logo/Logo";
+import Logo from "../logo/Logo";
 import LogoutBtn from "./LogoutBtn";
+import { motion } from "framer-motion";
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status); // Check if the user is logged or not
@@ -43,7 +44,10 @@ function Header() {
 
   return (
     <>
-      <header
+      <motion.header
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.25 }}
         className={`flex items-center p-4 shadow bg-[var(--bg-color)] border-x-0 border-b-[1px] border-solid border-[var(--black)] ${
           confirmed.status ? "opacity-[.05] -z-20" : "opacity-100 z-0"
         }`}
@@ -82,7 +86,7 @@ function Header() {
             </div>
           </nav>
         </div>
-      </header>
+      </motion.header>
     </>
   );
 }

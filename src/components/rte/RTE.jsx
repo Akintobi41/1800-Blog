@@ -13,6 +13,7 @@ function RTE({ name, control, label, defaultValue = "" }) {
         control={control}
         rules={{
           required: true,
+          maxLength: 1000,
         }}
         render={({ field: { onChange } }) => (
           <Editor
@@ -50,7 +51,6 @@ function RTE({ name, control, label, defaultValue = "" }) {
               content_style:
                 "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
               selector: "textarea",
-              auto_focus: "tiny-react_6255810451714222692121",
             }}
             onEditorChange={onChange}
           />

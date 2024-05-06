@@ -13,6 +13,7 @@ import Loader from "../../components/loader/Loader";
 import Container from "./../../components/container/Container";
 import PostCard from "./../../components/postCard/PostCard";
 import { sortData } from "./../../utils/sortData/sortData";
+import { motion } from "framer-motion";
 
 function Home({ authentication }) {
   const { data, isLoading } = useQuery({
@@ -39,7 +40,15 @@ function Home({ authentication }) {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="w-full pb-8">
+        <motion.div
+          className="w-full pb-8"
+          variants={{
+            hidden: { opacity: 0, y: 75 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          initial="hidden"
+          animate="visible"
+        >
           {authStatus ? (
             <>
               {posts?.length > 0 && (
@@ -74,7 +83,7 @@ function Home({ authentication }) {
             </>
           ) : (
             <Container>
-              <h1 className=" flex flex-col justify-center s-lg:text-[86px] sm:text-[54px] sm:max-w-full leading-[50px] font-bold p-6 italic min-h-[350px] text-left px-4">
+              <h1 className=" flex flex-col justify-center s-lg:text-[100px] sm:text-[54px] sm:max-w-full leading-[50px] font-bold p-6 italic min-h-[350px] text-left px-4">
                 {" "}
                 Discover what's new
                 <small className="block text-[20px] font-normal leading-8 mt-8">
@@ -111,7 +120,7 @@ function Home({ authentication }) {
               />
             </p>
           )}
-        </div>
+        </motion.div>
       )}
     </>
   );

@@ -74,6 +74,8 @@ function PostForm({ post }) {
     const img = e.target.files[0];
 
     if (!img) {
+      setVal(true)
+      setCaption('')
       return; // Exit early if no image selected
     }
     // Read the selected image
@@ -89,6 +91,8 @@ function PostForm({ post }) {
     post && setValue("title", post.title);
     post && setValue("content", post.content);
   }, [post]);
+
+  console.log(errors);
 
   return (
     <form
@@ -117,11 +121,6 @@ function PostForm({ post }) {
           maxLength="20"
           {...register("title", { required: true })}
         />
-        <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-[.8rem]">
-          {errors.title && errors.title.type === "required" && (
-            <span>blog title is required*</span>
-          )}
-        </div>
 
         <RTE
           label="Content: "
@@ -129,18 +128,26 @@ function PostForm({ post }) {
           control={control}
           defaultValue={getValues("content")}
         />
+        <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-[.8rem]">
+          {errors.content && errors.content.type === "maxLength" && (
+            <span>content length must not be more than 1000 characters*</span>
+          )}
+        </div>
       </div>
       <div className="1/3 mt-12">
         <p className="mb-2">Featured Image:</p>
         <figure>
+          <div className="w-20 h-20 sm:w-[12rem] sm:h-[12rem]">
           <img
             src={
               val ||
               (post && appwriteService.getFilePreview(post.featuredImage))
             }
             alt=""
-            className="w-[5rem] h-[5rem] sm:w-[12rem] sm:h-[12rem] object-cover"
+            className={`${val ? 'opacity-0' : 'opacity-100'}w-[5rem] h-[5rem] sm:w-[12rem] sm:h-[12rem] object-cover`}
           />
+          </div>
+         
           <figcaption id="file-name" className="h-[1.5rem]">
             {caption}
           </figcaption>
@@ -150,15 +157,12 @@ function PostForm({ post }) {
           type="file"
           id="img"
           className="mb-4"
-          src={
-            val || (post && appwriteService.getFilePreview(post.featuredImage))
-          }
           accept="image/png, image/jpg, image/jpeg"
-          {...register(
-            "image",
-            { onChange: (e) => uploadImage(e) },
-            { required: !post },
-          )}
+          onInput={(e)=>uploadImage(e)}
+          {...register("image", {required: !post})}
+          // name={name}
+          // onChange={(e) => uploadImage(e)}
+          // required={!post}
         />
         <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-3">
           {errors.image && errors.image.type === "required" && (

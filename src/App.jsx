@@ -9,7 +9,7 @@ import authService from "./appwrite/auth";
 import appwriteService from "./appwrite/config";
 import ConfirmDelete from "./components/confirmDelete/ConfirmDelete";
 import Footer from "./components/footer/Footer";
-import Header from "./components/header-logout/Header";
+import Header from "./components/headerLogout/Header";
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
