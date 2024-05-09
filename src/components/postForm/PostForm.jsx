@@ -74,8 +74,8 @@ function PostForm({ post }) {
     const img = e.target.files[0];
 
     if (!img) {
-      setVal(true)
-      setCaption('')
+      setVal("no image");
+      setCaption("");
       return; // Exit early if no image selected
     }
     // Read the selected image
@@ -92,7 +92,6 @@ function PostForm({ post }) {
     post && setValue("content", post.content);
   }, [post]);
 
-  console.log(errors);
 
   return (
     <form
@@ -137,17 +136,23 @@ function PostForm({ post }) {
       <div className="1/3 mt-12">
         <p className="mb-2">Featured Image:</p>
         <figure>
-          <div className="w-20 h-20 sm:w-[12rem] sm:h-[12rem]">
-          <img
-            src={
-              val ||
-              (post && appwriteService.getFilePreview(post.featuredImage))
-            }
-            alt=""
-            className={`${val ? 'opacity-0' : 'opacity-100'}w-[5rem] h-[5rem] sm:w-[12rem] sm:h-[12rem] object-cover`}
-          />
+          <div
+            className={`w-20 h-20 sm:w-[12rem] sm:h-[12rem] ${
+              val == "no image" && "border border-solid border-[#0000000d]"
+            }`}
+          >
+            <img
+              src={
+                val ||
+                (post && appwriteService.getFilePreview(post.featuredImage))
+              }
+              alt=""
+              className={`${
+                val == "no image" && "hidden"
+              } w-[5rem] h-[5rem] sm:w-[12rem] sm:h-[12rem] object-cover`}
+            />
           </div>
-         
+
           <figcaption id="file-name" className="h-[1.5rem]">
             {caption}
           </figcaption>
@@ -158,11 +163,8 @@ function PostForm({ post }) {
           id="img"
           className="mb-4"
           accept="image/png, image/jpg, image/jpeg"
-          onInput={(e)=>uploadImage(e)}
-          {...register("image", {required: !post})}
-          // name={name}
-          // onChange={(e) => uploadImage(e)}
-          // required={!post}
+          onInput={(e) => uploadImage(e)}
+          {...register("image", { required: !post })}
         />
         <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-3">
           {errors.image && errors.image.type === "required" && (
