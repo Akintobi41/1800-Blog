@@ -58,7 +58,7 @@ function App() {
           <div
             className={`  ${
               toggle ? "h-screen overflow-hidden" : "min-h-screen"
-            } flex flex-wrap bg-[#ffffff]`}
+            } flex flex-wrap bg-[#ffffff] overflow-x-hidden`}
           >
             <div className="w-full block h-full min-h-[500px]">
               <Header toggle={toggle} setToggle={setToggle} />
