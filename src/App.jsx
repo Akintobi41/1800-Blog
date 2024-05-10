@@ -57,7 +57,7 @@ function App() {
         {!loading && (
           <div
             className={`  ${
-              toggle ? "h-screen overflow-auto" : "min-h-screen"
+              toggle ? "h-screen overflow-hidden" : "min-h-screen"
             } flex flex-wrap bg-[#ffffff]`}
           >
             <div className="w-full block h-full min-h-[500px]">
