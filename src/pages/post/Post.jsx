@@ -1,12 +1,10 @@
 import parse from "html-react-parser";
-import { Fragment, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { MyContext } from "../../MyContext";
 import appwriteService from "../../appwrite/config";
 import Loader from "../../components/loader/Loader";
-import Button from "./../../components/button/Button";
-import EditDeleteIcon from "./../../components/editDeleteIcon/EditDeleteIcon";
 import SharePost from "./sharePost/SharePost";
 import ModifyPost from "./modifyPost/ModifyPost";
 
@@ -19,6 +17,8 @@ function Post() {
   const userId = permission?.match(/user:(.*?)"/)[1];
   const isAuthor = post && userData ? userId === userData.$id : false;
   const { confirmed, setConfirmed } = useContext(MyContext);
+
+  const url = '1800-blog.vercel.app/post/';
 
   useEffect(() => {
     if (id) {
@@ -61,12 +61,12 @@ function Post() {
         </p>
       </section>
       <div className="py-8 px-4 w-full max-w-[900px] m-auto">
-        <p className="sm:text-[2.5rem] sm:font-bold text-[1.5rem] font-[600] text-center sm:text-left text-gray-500">
+        <p className="sm:text-[2.5rem] sm:font-bold text-[1.5rem] font-[600] text-center sm:text-left">
           {post?.title}
         </p>
         <div className="flex justify-between gap-x-6  px-4 sm:px-0 text-[.55rem] sm:text-[1rem] mt-2">
           <p className="">Last updated: {updatedDate.toDateString()}</p>
-          <SharePost />
+          <SharePost link={`${url}${post.$id}`}/>
         </div>
         {isAuthor && (
           <div className="flex justify-end mt-12 pl-4 mb-4">

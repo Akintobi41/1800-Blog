@@ -8,7 +8,6 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { MyContext } from "./../../MyContext";
 import appwriteService from "../../appwrite/config";
-import Button from "../../components/button/Button";
 import Loader from "../../components/loader/Loader";
 import Container from "./../../components/container/Container";
 import PostCard from "./../../components/postCard/PostCard";

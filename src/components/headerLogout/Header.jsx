@@ -6,7 +6,6 @@ import { MyContext } from "../../MyContext";
 import HamburgerMenu from "../hamburgerMenu/HamburgerMenu";
 import Logo from "../logo/Logo";
 import LogoutBtn from "./LogoutBtn";
-import { motion } from "framer-motion";
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status); // Check if the user is logged or not
