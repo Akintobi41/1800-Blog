@@ -57,11 +57,11 @@ function App() {
         {!loading && (
           <div
             className={`  ${
-              toggle ? "h-screen overflow-hidden" : "min-h-screen"
-            } flex flex-wrap bg-[#ffffff] overflow-x-hidden`}
+              toggle ? "h-screen overflow-hidden" : ""
+            } flex flex-wrap bg-[#ffffff] overflow-x-hidden min-h-screen`}
           >
             <div className="w-full block h-full min-h-[500px]">
-              <Header toggle={toggle} setToggle={setToggle} />
+              <Header toggle={toggle} setToggle={setToggle}  />
               <main
                 className={`bg-[#ffffff] ${
                   confirmed.status ? "opacity-[.05] -z-20" : "opacity-100 z-10"
@@ -71,7 +71,7 @@ function App() {
               </main>
             </div>
             <div className="w-full block self-end">
-              <Footer />
+              <Footer/>
             </div>
           </div>
         )}

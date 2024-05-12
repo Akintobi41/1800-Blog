@@ -35,7 +35,6 @@ function Home({ authentication }) {
   function handleMorePosts() {
     setNext(next + postPerSlide);
   }
-
   return (
     <>
       {isLoading ? (
@@ -60,7 +59,7 @@ function Home({ authentication }) {
               <Container>
                 <div className="flex flex-wrap px-4 mt-6 w-full gap-y-[3rem] xs:gap-x-[1rem]">
                   {sortData(posts, "$updatedAt")
-                    .slice(0, next)
+                    ?.slice(0, next)
                     ?.map((post) => (
                       <div
                         className="w-full xs:w-[48%] s-lg:w-[32%]"

@@ -44,12 +44,11 @@ function Header() {
 
   return (
     <>
-      <motion.header
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.25 }}
+      <header
         className={`flex items-center p-4 shadow bg-[var(--bg-color)] border-x-0 border-b-[1px] border-solid border-[var(--black)] ${
-          confirmed.status ? "opacity-[.05] -z-20" : "opacity-100 z-0"
+          confirmed.status
+            ? "opacity-[.3] -z-20 pointer-events-none"
+            : "opacity-100 z-0"
         }`}
       >
         <div className="w-full m-auto flex justify-center max-w-[2000px]">
@@ -86,7 +85,7 @@ function Header() {
             </div>
           </nav>
         </div>
-      </motion.header>
+      </header>
     </>
   );
 }

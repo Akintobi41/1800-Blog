@@ -13,6 +13,8 @@ export class AuthService {
     this.client.setEndpoint(endpoint).setProject(projectId);
     this.databases = new Databases(this.client);
     this.bucket = new Storage(this.client);
+    // console.log(this.databases)
+    // console.log(this.client)
   }
 
   async getPost(slug) {
