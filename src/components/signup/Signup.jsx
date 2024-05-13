@@ -15,7 +15,7 @@ function Signup() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-  const { register, handleSubmit, watch, formState } = useForm();
+  const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const { name } = errors;
   const { setToggle } = useContext(MyContext);

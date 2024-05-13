@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -6,10 +7,10 @@ import { MyContext } from "../../MyContext";
 import authService from "../../appwrite/auth";
 import { login as authLogin } from "../../store/authSlice";
 import Button from "../button/Button";
+import ButtonLoader from "../button/ButtonLoader";
 import Input from "../input/Input";
 import Logo from "../logo/Logo";
 import Title from "../title/Title";
-import ButtonLoader from "../button/ButtonLoader";
 
 function Login() {
   const navigate = useNavigate();
