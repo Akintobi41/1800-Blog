@@ -52,7 +52,6 @@ function Post() {
         .then(() => {
           // If successful, update the isCopied state value
           setCopy(true);
-          console.log("copy");
         })
         .catch((err) => {
           console.log(err);

@@ -92,7 +92,6 @@ function PostForm({ post }) {
     post && setValue("content", post.content);
   }, [post]);
 
-
   return (
     <form
       onSubmit={handleSubmit(submit)}
@@ -161,21 +160,19 @@ function PostForm({ post }) {
           label={<FontAwesomeIcon icon={faFileUpload} className="mr-4" />}
           type="file"
           id="img"
-          className="mb-4"
+          className="mb-2"
           accept="image/png, image/jpg, image/jpeg"
           onInput={(e) => uploadImage(e)}
           {...register("image", { required: !post })}
         />
-        <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-3">
+        <div className="mt4 mb-4 text-[.65rem] italic text-[red] h-6">
           {errors.image && errors.image.type === "required" && (
             <span>Image is required*</span>
           )}
-        </div>{" "}
-        <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-3">
           {errors.content && errors.content.type === "required" && (
-            <span>Content is required*</span>
+            <span className="block">Content is required*</span>
           )}
-        </div>
+        </div>{" "}
         <Button
           type="submit"
           className="w-full"
