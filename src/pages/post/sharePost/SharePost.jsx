@@ -5,13 +5,16 @@ function SharePost({ link }) {
   const share = [
     {
       icon: "../../../public/Icons/twitter.svg",
-      url: `https://twitter.com/intent/tweet?text=${link}`,
+      url: `https://twitter.com/intent/tweet?url=${link}`,
     },
     {
       icon: "../../../public/Icons/telegram.svg",
       url: `https://t.me/share/url?url=${link}`,
     },
-    { icon: "../../../public/Icons/facebook.svg", url: "" },
+    {
+      icon: "../../../public/Icons/icons8-linkedin.svg",
+      url: `https://www.linkedin.com/sharing/share-offsite/?url=${link}`,
+    },
   ];
 
   return (

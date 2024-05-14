@@ -7,6 +7,7 @@ import appwriteService from "../../appwrite/config";
 import Loader from "../../components/loader/Loader";
 import SharePost from "./sharePost/SharePost";
 import ModifyPost from "./modifyPost/ModifyPost";
+import Button from "../../components/button/Button";
 
 function Post() {
   const [post, setPost] = useState();
@@ -17,8 +18,9 @@ function Post() {
   const userId = permission?.match(/user:(.*?)"/)[1];
   const isAuthor = post && userData ? userId === userData.$id : false;
   const { confirmed, setConfirmed } = useContext(MyContext);
+  const [copy, setCopy] = useState(false);
 
-  const url = '1800-blog.vercel.app/post/';
+  const url = "1800-blog.vercel.app/post/";
 
   useEffect(() => {
     if (id) {
@@ -35,10 +37,29 @@ function Post() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  function runDelete() { 
-    setConfirmed({ val: post, status: !confirmed.status })
+  function runDelete() {
+    setConfirmed({ val: post, status: !confirmed.status });
   }
+  // function copyToClip(link) {}
+  async function copyTextToClipboard(text) {
+    return await navigator.clipboard.writeText(text);
+  }
+  const handleCopyClick = () => {
+    // Asynchronously call copyTextToClipboard
 
+    if (!copy) {
+      copyTextToClipboard(`${url}${id}`)
+        .then(() => {
+          // If successful, update the isCopied state value
+          setCopy(true);
+          console.log("copy");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    setCopy(false);
+  };
   const updatedDate = new Date(post?.$updatedAt);
 
   return post ? (
@@ -66,7 +87,7 @@ function Post() {
         </p>
         <div className="flex justify-between gap-x-6  px-4 sm:px-0 text-[.55rem] sm:text-[1rem] mt-2">
           <p className="">Last updated: {updatedDate.toDateString()}</p>
-          <SharePost link={`${url}${post.$id}`}/>
+          <SharePost link={`${url}${post.$id}`} />
         </div>
         {isAuthor && (
           <div className="flex justify-end mt-12 pl-4 mb-4">
@@ -96,6 +117,14 @@ function Post() {
             <ModifyPost text={"Delete"} bg={"bg-red-500"} deleteP={runDelete} />
           </div>
         )}
+        <Button
+          bgColor={"#e7ffee"}
+          onClick={handleCopyClick}
+          className="w-[9.4rem]"
+        >
+          <img src="/Icons/icons8-copy-24.png" alt="copy" className="mx-1" />
+          {copy ? "Copied" : "Copy link"}
+        </Button>
       </div>
     </>
   ) : (
