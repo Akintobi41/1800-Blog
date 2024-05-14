@@ -40,7 +40,6 @@ function Post() {
   function runDelete() {
     setConfirmed({ val: post, status: !confirmed.status });
   }
-  // function copyToClip(link) {}
   async function copyTextToClipboard(text) {
     return await navigator.clipboard.writeText(text);
   }

@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 function SharePost({ link }) {
   const share = [
     {
-      icon: "../../../public/Icons/twitter.svg",
+      icon: "/Icons/twitter.svg",
       url: `https://twitter.com/intent/tweet?url=${link}`,
     },
     {
-      icon: "../../../public/Icons/telegram.svg",
+      icon: "/Icons/telegram.svg",
       url: `https://t.me/share/url?url=${link}`,
     },
     {
-      icon: "../../../public/Icons/icons8-linkedin.svg",
+      icon: "/Icons/icons8-linkedin.svg",
       url: `https://www.linkedin.com/sharing/share-offsite/?url=${link}`,
     },
   ];
