@@ -50,7 +50,7 @@ function Post() {
     if (!copy) {
       copyTextToClipboard(`${url}${id}`)
         .then(() => {
-          // If successful, update the isCopied state value
+          // If successful, update the setCopy state value
           setCopy(true);
         })
         .catch((err) => {
