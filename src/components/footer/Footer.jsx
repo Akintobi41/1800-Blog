@@ -7,7 +7,7 @@ function Footer() {
 
   return (
     <section
-      className={`relative py-10 bg-[var(--bg-color)] ${
+      className={`relative bottom-0 py-10 bg-[var(--bg-color)] ${
         confirmed.status
           ? "opacity-[.3] pointer-events-none"
           : "opacity-100 z-0"

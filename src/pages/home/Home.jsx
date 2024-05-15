@@ -83,7 +83,7 @@ function Home({ authentication }) {
           ) : (
             <Discover />
           )}
-          {next < posts?.length && (
+          {authStatus && next < posts?.length && (
             <p
               className="flex justify-center font-bold mt-4 text-center cursor-pointer text-[var(--black)]"
               onClick={handleMorePosts}
