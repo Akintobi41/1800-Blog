@@ -13,9 +13,8 @@ function ModifyPost({bg,text,deleteP}) {
             text === 'Delete' ? deleteP() : null }}
       >
         <EditDeleteIcon
-          src={"/Icons/edit.svg"}
-          alt={"edit-post"}
           className={"h-[.7rem] w-[.7rem] mr-[.45rem]"}
+          text={text}
         />
         {text}
       </Button>

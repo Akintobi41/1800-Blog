@@ -67,12 +67,11 @@ function Post() {
           onClick={() => navigate("/")}
           className="flex items-center h-4 p-4"
         >
-          <img
-            src="/Icons/icons8-back-arrow-50.png"
-            alt="go-back"
-            className="w-4 h-4 mr-[.8rem] cursor-pointer"
-            onClick={() => navigate("/")}
-          />
+         
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4 mr-[.8rem] cursor-pointer"  onClick={() => navigate("/")}>
+  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+</svg>
+
           <p className="text-[.8rem] sm:text-[1rem]">back</p>
         </Link>
         <p className="hidden sm:block mx-4 mt-[8rem] text-[.6rem] sm:text-[1rem]">

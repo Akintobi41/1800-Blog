@@ -98,12 +98,9 @@ function PostForm({ post }) {
       className="w-full sm:w-full sm:pr-0 flex flex-wrap flex-col gap-y-4 mt-6 sm:px-4 mb-4"
     >
       <div className="flex items-center mb-6">
-        <img
-          src="/Icons/icons8-back-arrow-50.png"
-          alt="go-back"
-          className="w-4 h-4 cursor-pointer"
-          onClick={() => navigate("/")}
-        />
+         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4 mr-[.8rem] cursor-pointer"  onClick={() => navigate("/")}>
+  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+</svg>
         <span className="px-2 font-bold text-[.85rem]">Posts</span>
       </div>
       <p className="font-bold">{!post ? "Create a Post" : "Edit Post"}</p>
