@@ -43,7 +43,7 @@ function Login() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center px-6 h-full">
+    <div className="flex justify-center px-6 h-full">
       <div className={`flex flex-col items-center mx-auto w-full`}>
         <div className="mb-2 flex justify-center">
           <span className="inline-block w-full max-w-[100px]">

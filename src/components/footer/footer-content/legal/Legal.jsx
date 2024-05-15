@@ -5,7 +5,7 @@ function Legal() {
   const listItems = ["Terms & Conditions", "Privacy Policy", "Licensing"];
   return (
     <>
-      <div className="w-full md:w-1/2 lg:w-3/12">
+      <div className="w-full py-4 md:w-1/2 lg:w-3/12">
         <div className="h-full">
           <h3 className="tracking-px mb-9  text-xs font-semibold uppercase text-gray-500">
             Legals
@@ -13,7 +13,7 @@ function Legal() {
           <ul>
             {listItems.map((list) => (
               <Fragment key={list}>
-                <li className="mb-4">
+                <li className="mb-2">
                   <Link
                     className=" text-base font-medium text-gray-900 hover:text-gray-700"
                     to="/"

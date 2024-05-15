@@ -18,7 +18,6 @@ function Signup() {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const { name } = errors;
-  const { setToggle } = useContext(MyContext);
   const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(null);
 
@@ -41,10 +40,6 @@ function Signup() {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    setToggle(false);
-  }, []);
 
   return (
     <div className="flex items-center justify-center px-6">
@@ -111,7 +106,7 @@ function Signup() {
               Create Account
             </Button>
           </div>
-          <div className="text-[.7rem] text-center mt-4">
+          <div className="text-center mt-4">
             <p>
               Signing up your account means you agree to the{" "}
               <a>Privacy Policy</a>,
