@@ -119,7 +119,7 @@ function Post() {
           onClick={handleCopyClick}
           className="w-[9.4rem]"
         >
-          <img src="/Icons/icons8-copy-24.png" alt="copy" className="mx-1" />
+          <img src="/Icons/icons8-copy-24.png" alt="copy" className="mx-1"  loading="lazy"/>
           {copy ? "Copied" : "Copy link"}
         </Button>
       </div>

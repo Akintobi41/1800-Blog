@@ -61,7 +61,7 @@ function App() {
             } flex flex-wrap bg-[#ffffff] overflow-x-hidden min-h-screen`}
           >
             <div className="w-full block h-full min-h-[500px]">
-              <Header toggle={toggle} setToggle={setToggle}  />
+              <Header toggle={toggle} setToggle={setToggle} />
               <main
                 className={`bg-[#ffffff] ${
                   confirmed.status ? "opacity-[.05] -z-20" : "opacity-100 z-10"
@@ -70,8 +70,8 @@ function App() {
                 <Outlet />
               </main>
             </div>
-            <div className="w-full block self-end">
-              <Footer/>
+            <div className="w-full block self-end relative bottom-0 min-h-[300px]">
+              <Footer />
             </div>
           </div>
         )}

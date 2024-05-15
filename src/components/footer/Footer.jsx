@@ -7,14 +7,14 @@ function Footer() {
 
   return (
     <section
-      className={`relative bottom-0 py-10 bg-[var(--bg-color)] ${
+      className={`relative bottom-0 pt-10 bg-[var(--bg-color)] ${
         confirmed.status
           ? "opacity-[.3] pointer-events-none"
           : "opacity-100 z-0"
       } border border-t-2 border-t-black`}
     >
       <div className="relative mx-auto max-w-[2000px] px-4">
-        <div className="-m-6 flex flex-wrap">
+        <div className="flex flex-wrap">
           <FooterContent />
         </div>
       </div>

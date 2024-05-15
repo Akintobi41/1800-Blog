@@ -1,11 +1,11 @@
-import Logo from '../../../logo/Logo'
+import Logo from "../../../logo/Logo";
 
 function Copyright() {
   const year = new Date().getFullYear();
 
   return (
     <>
-       <div className="w-full p-6 md:w-1/2 lg:w-5/12">
+      <div className="w-full  md:w-1/2 lg:w-5/12">
         <div className="flex h-full flex-col justify-between">
           <div className="mb-4 inline-flex items-center">
             <Logo width="100px" />
@@ -16,8 +16,9 @@ function Copyright() {
             </p>
           </div>
         </div>
-      </div></>
-  )
+      </div>
+    </>
+  );
 }
 
-export default Copyright
+export default Copyright;
