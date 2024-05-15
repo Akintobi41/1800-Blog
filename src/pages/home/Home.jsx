@@ -12,7 +12,6 @@ import Loader from "../../components/loader/Loader";
 import Container from "./../../components/container/Container";
 import PostCard from "./../../components/postCard/PostCard";
 import { sortData } from "./../../utils/sortData/sortData";
-import { motion } from "framer-motion";
 import Discover from "../../components/discover/Discover";
 
 function Home({ authentication }) {
@@ -39,14 +38,7 @@ function Home({ authentication }) {
       {isLoading ? (
         <Loader />
       ) : (
-        <motion.div
-          className="w-full pb-8"
-          variants={{
-            hidden: { opacity: 0, y: 75 },
-            visible: { opacity: 1, y: 0 },
-          }}
-          initial="hidden"
-          animate="visible"
+        <div
         >
           {authStatus ? (
             <>
@@ -106,7 +98,7 @@ function Home({ authentication }) {
               </svg>
             </p>
           )}
-        </motion.div>
+        </div>
       )}
     </>
   );
