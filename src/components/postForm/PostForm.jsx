@@ -91,6 +91,7 @@ function PostForm({ post }) {
     post && setValue("title", post.title);
     post && setValue("content", post.content);
   }, [post]);
+  console.log(errors.content.type);
 
   return (
     <form
@@ -98,9 +99,21 @@ function PostForm({ post }) {
       className="w-full sm:w-full sm:pr-0 flex flex-wrap flex-col gap-y-4 mt-6 sm:px-4 mb-4"
     >
       <div className="flex items-center mb-6">
-         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4 mr-[.8rem] cursor-pointer"  onClick={() => navigate("/")}>
-  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-</svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="currentColor"
+          className="w-4 h-4 mr-[.8rem] cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+          />
+        </svg>
         <span className="px-2 font-bold text-[.85rem]">Posts</span>
       </div>
       <p className="font-bold">{!post ? "Create a Post" : "Edit Post"}</p>
@@ -123,11 +136,6 @@ function PostForm({ post }) {
           control={control}
           defaultValue={getValues("content")}
         />
-        <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-[.8rem]">
-          {errors.content && errors.content.type === "maxLength" && (
-            <span>content length must not be more than 1000 characters*</span>
-          )}
-        </div>
       </div>
       <div className="1/3 mt-12">
         <p className="mb-2">Featured Image:</p>
@@ -169,6 +177,11 @@ function PostForm({ post }) {
           {errors.content && errors.content.type === "required" && (
             <span className="block">Content is required*</span>
           )}
+          <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-[.8rem]">
+            {errors.content && errors.content.type === "maxLength" && (
+              <span>content length must not be more than 1000 characters*</span>
+            )}
+          </div>
         </div>{" "}
         <Button
           type="submit"

@@ -55,7 +55,7 @@ function SharePost({ link }) {
     <div className="flex gap-x-3">
       {" "}
       {share.map((i) => (
-        <Link key={i.icon} to={i.url} target="_blank" rel="noopener noreferrer">
+        <Link key={i.url} to={i.url} target="_blank" rel="noopener noreferrer">
           {i.icon}
         </Link>
       ))}

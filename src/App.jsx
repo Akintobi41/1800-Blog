@@ -70,7 +70,7 @@ function App() {
                 <Outlet />
               </main>
             </div>
-            <div className="w-full block self-end relative bottom-0 min-h-[300px]">
+            <div className="w-full block self-end relative bottom-0 min-h-[150px]">
               <Footer />
             </div>
           </div>

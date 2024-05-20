@@ -67,10 +67,21 @@ function Post() {
           onClick={() => navigate("/")}
           className="flex items-center h-4 p-4"
         >
-         
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4 mr-[.8rem] cursor-pointer"  onClick={() => navigate("/")}>
-  <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
-</svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-4 h-4 mr-[.8rem] cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+            />
+          </svg>
 
           <p className="text-[.8rem] sm:text-[1rem]">back</p>
         </Link>
@@ -105,23 +116,30 @@ function Post() {
             {parse(post.content)}
           </div>
         </div>
-        <div>
-          <p className="mb-2">Share</p>
-          <SharePost />
+        <div className="flex flex-col">
+          <section className="flex align-center items-center">
+            <p className="mr-4">Share</p>
+            <SharePost />
+          </section>
+          <Button
+            bgColor={"#e7ffee"}
+            onClick={handleCopyClick}
+            className="w-40 justify-start p-0"
+          >
+            <img
+              src="/Icons/icons8-copy-24.png"
+              alt="copy"
+              className="mx-1"
+              loading="lazy"
+            />
+            {copy ? "Copied" : "Copy link"}
+          </Button>
         </div>
         {isAuthor && (
           <div className="flex justify-end mt-2 border-t-[1px] border-solid border-[var(--bg-color)] pt-4">
             <ModifyPost text={"Delete"} bg={"bg-red-500"} deleteP={runDelete} />
           </div>
         )}
-        <Button
-          bgColor={"#e7ffee"}
-          onClick={handleCopyClick}
-          className="w-[9.4rem]"
-        >
-          <img src="/Icons/icons8-copy-24.png" alt="copy" className="mx-1"  loading="lazy"/>
-          {copy ? "Copied" : "Copy link"}
-        </Button>
       </div>
     </>
   ) : (
