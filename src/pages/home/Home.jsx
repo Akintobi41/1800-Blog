@@ -48,7 +48,7 @@ function Home({ authentication }) {
                 </h2>
               )}
               <Container>
-                <div className="flex flex-wrap px-4 mt-6 w-full gap-y-[3rem] xs:gap-x-[1rem]">
+                <div className="flex flex-wrap px-4 pb-8 mt-6 w-full gap-y-[3rem] xs:gap-x-[1rem]">
                   {sortData(posts, "$updatedAt")
                     ?.slice(0, next)
                     ?.map((post) => (
@@ -77,7 +77,7 @@ function Home({ authentication }) {
           )}
           {authStatus && next < posts?.length && (
             <p
-              className="flex justify-center font-bold mt-4 text-center cursor-pointer text-[var(--black)]"
+              className="flex justify-center font-bold mt-4 mb-2 text-center cursor-pointer text-[var(--black)]"
               onClick={handleMorePosts}
             >
               Load more{" "}

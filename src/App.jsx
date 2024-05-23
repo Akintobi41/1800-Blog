@@ -26,6 +26,7 @@ function App() {
         else dispatch(logout());
       })
       .finally(() => setLoading(false));
+ 
   }, []);
   const deletePost = (post) => {
     appwriteService.deletePost(post?.$id).then((status) => {
@@ -58,7 +59,7 @@ function App() {
           <div
             className={`  ${
               toggle ? "h-screen overflow-hidden" : ""
-            } flex flex-wrap bg-[#ffffff] overflow-x-hidden min-h-screen`}
+            }flex flex-col bg-[#ffffff] min-h-screen absolute top-0 left-0 -bottom-5 -right-5 overflow-x-hidden overflow-y-scroll`}
           >
             <div className="w-full block h-full min-h-[500px]">
               <Header toggle={toggle} setToggle={setToggle} />
@@ -69,10 +70,11 @@ function App() {
               >
                 <Outlet />
               </main>
-            </div>
-            <div className="w-full block self-end relative bottom-0 min-h-[150px]">
+              <div className="w-full block self-end relative xl:absolute bottom-0 min-h-[150px] pb-4">
               <Footer />
             </div>
+            </div>
+           
           </div>
         )}
       </MyContext.Provider>

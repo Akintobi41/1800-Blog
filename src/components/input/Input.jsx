@@ -12,12 +12,11 @@ const Input = React.forwardRef(function Input(
       {label && (
         <label
           htmlFor={id}
-          className={`inline-block mb-4 pl-1 cursor-pointer ${
+          className={`inline-block mb-4 pl-1 cursor-pointer  ${
             type === "file"
               ? "block relative text-[var(--black)] w-full text-center border-dashed border-[3px] rounded-[5px]"
               : ""
-          }`}
-        >
+          }`}>
           {label} {type === "file" ? "Choose A Photo" : ""}
         </label>
       )}

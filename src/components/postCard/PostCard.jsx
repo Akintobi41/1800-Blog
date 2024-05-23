@@ -29,7 +29,7 @@ function PostCard({ $id, title, featuredImage, content, $createdAt }) {
         </div>
         <h2 className="text-xl font-bold px-2">{title}</h2>
 
-        <div className="whitespace-wrap overflow-hidden text-ellipsis py-4 px-2 w-full text-[.7rem]">
+        <div className="whitespace-wrap overflow-hidden text-ellipsis py-1 px-4 w-full text-[.7rem]">
           {parse(content)}
         </div>
       </motion.div>

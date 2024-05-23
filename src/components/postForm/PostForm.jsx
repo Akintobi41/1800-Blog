@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -26,10 +26,12 @@ function PostForm({ post }) {
   const [disabled, setDisabled] = useState(false);
   const [val, setVal] = useState(null);
   const [caption, setCaption] = useState("");
+  const editorRef = useRef(null);
 
   async function submit(data) {
     setLoading(true);
     setDisabled(true);
+
     if (post) {
       const file = data?.image[0]
         ? await appwriteService.uploadFile(data.image[0])
@@ -90,8 +92,8 @@ function PostForm({ post }) {
   useEffect(() => {
     post && setValue("title", post.title);
     post && setValue("content", post.content);
+
   }, [post]);
-  console.log(errors.content.type);
 
   return (
     <form
@@ -119,7 +121,7 @@ function PostForm({ post }) {
       <p className="font-bold">{!post ? "Create a Post" : "Edit Post"}</p>
       <div className="w-full">
         <Input
-          label="Title"
+          label="Title:" 
           placeholder="Title (20 characters please)"
           className={`mb-4 [max-] border-[1px] ${
             errors.title &&
@@ -131,10 +133,11 @@ function PostForm({ post }) {
         />
 
         <RTE
-          label="Content: "
+          label="Content:"
           name="content"
           control={control}
           defaultValue={getValues("content")}
+          editorRef={editorRef}
         />
       </div>
       <div className="1/3 mt-12">
@@ -175,7 +178,10 @@ function PostForm({ post }) {
             <span>Image is required*</span>
           )}
           {errors.content && errors.content.type === "required" && (
-            <span className="block">Content is required*</span>
+           <>
+           <span className="block">Content is required*</span>
+          {editorRef?.current?.selection.scrollIntoView()}
+          </>
           )}
           <div className="-mt-6 mb-6 text-[.65rem] italic text-[red] h-[.8rem]">
             {errors.content && errors.content.type === "maxLength" && (
