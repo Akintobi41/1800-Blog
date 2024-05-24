@@ -27,7 +27,6 @@ function Home({ authentication }) {
 
   useEffect(() => {
     setToggle(false);
-    window.scrollTo(0, 0);
   }, []);
 
   function handleMorePosts() {
@@ -38,8 +37,7 @@ function Home({ authentication }) {
       {isLoading ? (
         <Loader />
       ) : (
-        <div
-        >
+        <div>
           {authStatus ? (
             <>
               {posts?.length > 0 && (
@@ -81,7 +79,6 @@ function Home({ authentication }) {
               onClick={handleMorePosts}
             >
               Load more{" "}
-            
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

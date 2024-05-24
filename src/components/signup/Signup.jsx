@@ -1,14 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { MyContext } from "../../MyContext";
 import { login } from "../../store/authSlice";
 import authService from "../../appwrite/auth";
 import Button from "../button/Button";
 import Input from "../input/Input";
-import Logo from "../logo/Logo";
 import Title from "../title/Title";
 
 function Signup() {
@@ -18,12 +16,11 @@ function Signup() {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const { name } = errors;
-  const [disabled, setDisabled] = useState(false);
+  // const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(null);
 
   const create = async (data) => {
     setError(""); // for resetting the error on to the initial state
-    setDisabled(true);
     setLoading(true);
 
     try {
@@ -36,7 +33,6 @@ function Signup() {
     } catch (error) {
       setError(error.message);
     } finally {
-      setDisabled(false);
       setLoading(false);
     }
   };
@@ -45,11 +41,9 @@ function Signup() {
     <div className="flex items-center justify-center px-6">
       <div className={`flex flex-col mx-auto w-full ml-[0rem]`}>
         <div className="mb-2 flex justify-center">
-          <span className="flex justify-center w-full">
-            <Logo />
-          </span>
+         
         </div>
-        <h6 className="text-center text-2xl font-[500] leading-tight">
+        <h6 className="text-center text-2xl font-[500] pt-4 leading-tight">
           Sign up to <Title />
         </h6>
         <div className="h-[1.5rem] mt-4 ">
@@ -113,7 +107,7 @@ function Signup() {
               <a href="">Terms of Service and Affiliate Terms</a>.
             </p>
 
-            <p className="mt-4">
+            <p className="mt-4 pb-4">
               Already signed up?{" "}
               <Link to={"/login"} className="italic hover:underline">
                 Log in

@@ -10,11 +10,13 @@ import appwriteService from "./appwrite/config";
 import ConfirmDelete from "./components/confirmDelete/ConfirmDelete";
 import Footer from "./components/footer/Footer";
 import Header from "./components/headerLogout/Header";
+import ScrollToTop from "./components/scroll/Scroll";
+
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const [toggle, setToggle] = useState(null);
-  const [confirmed, setConfirmed] = useState({ value: "", status: false }); // I set the state here
+  const [confirmed, setConfirmed] = useState({ value: "", status: false });
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
 
@@ -26,8 +28,8 @@ function App() {
         else dispatch(logout());
       })
       .finally(() => setLoading(false));
- 
   }, []);
+
   const deletePost = (post) => {
     appwriteService.deletePost(post?.$id).then((status) => {
       if (status) {
@@ -38,14 +40,16 @@ function App() {
       }
     });
   };
-
+   
   const queryClient = new QueryClient();
+
 
   return (
     <QueryClientProvider client={queryClient}>
       <MyContext.Provider
         value={{ toggle, setToggle, confirmed, setConfirmed }}
       >
+        <ScrollToTop/>
         {confirmed.status && (
           <ConfirmDelete
             confirmed={confirmed}
@@ -58,11 +62,12 @@ function App() {
         {!loading && (
           <div
             className={`  ${
-              toggle ? "h-screen overflow-hidden" : ""
-            }flex flex-col bg-[#ffffff] min-h-screen absolute top-0 left-0 -bottom-5 -right-5 overflow-x-hidden overflow-y-scroll`}
+              toggle ? "h-screen" : ""
+            } flex flex-wrap bg-[#ffffff] min-h-screen relative`}
           >
             <div className="w-full block h-full min-h-[500px]">
               <Header toggle={toggle} setToggle={setToggle} />
+              
               <main
                 className={`bg-[#ffffff] ${
                   confirmed.status ? "opacity-[.05] -z-20" : "opacity-100 z-10"
@@ -70,11 +75,11 @@ function App() {
               >
                 <Outlet />
               </main>
-              <div className="w-full block self-end relative xl:absolute bottom-0 min-h-[150px] pb-4">
+            
+            </div>
+            <div className="w-full block self-end relative bottom-0">
               <Footer />
             </div>
-            </div>
-           
           </div>
         )}
       </MyContext.Provider>

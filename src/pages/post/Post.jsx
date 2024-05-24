@@ -34,9 +34,7 @@ function Post() {
     }
   }, [id, navigate]);
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+
   function runDelete() {
     setConfirmed({ val: post, status: !confirmed.status });
   }

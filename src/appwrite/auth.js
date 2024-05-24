@@ -26,7 +26,7 @@ export class AuthService {
         return userAccount;
       }
     } catch (error) {
-      (error);
+      error;
       throw error;
     }
   }
@@ -34,7 +34,7 @@ export class AuthService {
     try {
       return await this.account.createEmailSession(email, password);
     } catch (error) {
-      (error);
+      error;
       throw error;
     }
   }
@@ -42,7 +42,7 @@ export class AuthService {
     try {
       return await this.account.get();
     } catch (error) {
-      ("Appwrite service :: getCurrentUser() :: ", error);
+      "Appwrite service :: getCurrentUser() :: ", error;
     }
     return null;
   }
@@ -50,7 +50,7 @@ export class AuthService {
     try {
       await this.account.deleteSessions();
     } catch (error) {
-      ("Appwrite service :: logout() ::", error);
+      "Appwrite service :: logout() ::", error;
       throw error;
     }
   }

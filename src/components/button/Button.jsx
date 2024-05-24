@@ -7,8 +7,8 @@ function Button({
   bgColor = "bg-[var(--secondary-color)]",
   textColor = "text-[var(--black)]",
   className = "",
-  height = 'h-[2.5rem]',
-  px = 'px-6',
+  height = "h-[2.5rem]",
+  px = "px-6",
   disabled,
   loading,
   ...props

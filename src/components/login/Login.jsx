@@ -9,7 +9,6 @@ import { login as authLogin } from "../../store/authSlice";
 import Button from "../button/Button";
 import ButtonLoader from "../button/ButtonLoader";
 import Input from "../input/Input";
-import Logo from "../logo/Logo";
 import Title from "../title/Title";
 
 function Login() {
@@ -46,11 +45,9 @@ function Login() {
     <div className="flex justify-center px-6 h-full">
       <div className={`flex flex-col items-center mx-auto w-full`}>
         <div className="mb-2 flex justify-center">
-          <span className="inline-block w-full max-w-[100px]">
-            <Logo width="100%" />
-          </span>
+         
         </div>
-        <h2 className="text-center text-2xl font-[500] leading-tight">
+        <h2 className="text-center text-2xl pt-4 font-[500] leading-tight">
           Log in to <Title />
         </h2>
 
@@ -80,7 +77,7 @@ function Login() {
               textColor={"text-[var(--black)]"}
               disabled={disabled}
             >
-              {disabled ? <ButtonLoader /> : "Sign in"}{" "}
+              {disabled ? <ButtonLoader /> : "Log in"}{" "}
             </Button>
           </div>
           <p className="mt-2 text-center text-base text-black/60 text-[.7rem]">

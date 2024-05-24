@@ -10,12 +10,12 @@ function PostCard({ $id, title, featuredImage, content, $createdAt }) {
     <Link to={`/post/${$id}`}>
       <motion.div
         className="max-w-full w-full overflow-hidden shadow-sm h-[20rem] border-[1px] rounded-xl"
-    variants={{ 
-      hidden : { opacity: 0, y:75 },
-      visible: {opacity: 1, y: 0}
-    }}   
-       initial='hidden'
-       animate ='visible'
+        variants={{
+          hidden: { opacity: 0, y: 75 },
+          visible: { opacity: 1, y: 0 },
+        }}
+        initial="hidden"
+        animate="visible"
       >
         <div className="w-full mb-4 h-[12rem]">
           <img

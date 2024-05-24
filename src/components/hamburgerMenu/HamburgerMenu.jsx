@@ -6,7 +6,7 @@ function HamburgerMenu() {
   const { toggle, setToggle } = useContext(MyContext);
 
   function menuToggle() {
-    setToggle(prevToggle => !prevToggle);
+    setToggle((prevToggle) => !prevToggle);
   }
   return (
     <>

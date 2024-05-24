@@ -8,8 +8,13 @@ function RTE({ name, control, label, defaultValue = "", editorRef }) {
 
   return (
     <div className="w-[100%] h-[30rem]">
-      {label && <label className="flex items-center mb-1 pl-1"> {label}  <Tooltip/></label>}
-     
+      {label && (
+        <label className="flex items-center mb-1 pl-1">
+          {" "}
+          {label} <Tooltip />
+        </label>
+      )}
+
       <Controller
         name={name || "content"}
         control={control}

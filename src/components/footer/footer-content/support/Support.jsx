@@ -1,19 +1,18 @@
-import {Fragment} from 'react'
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
 
-
 function Support() {
-  const listItems = ["Account", "Help", "Contact Us", 'Customer Support'];
+  const listItems = ["Account", "Help", "Contact Us", "Customer Support"];
 
   return (
     <>
-     <div className="w-full py-4 md:w-1/2 lg:w-2/12">
+      <div className="w-full py-4 md:w-1/2 lg:w-2/12">
         <div className="h-full">
           <h3 className="tracking-px mb-9  text-xs font-semibold uppercase text-gray-500">
             Support
           </h3>
           <ul>
-          {listItems.map((list) => (
+            {listItems.map((list) => (
               <Fragment key={list}>
                 <li className="mb-4">
                   <Link
@@ -28,8 +27,8 @@ function Support() {
           </ul>
         </div>
       </div>
-      </>
-  )
+    </>
+  );
 }
 
-export default Support
+export default Support;

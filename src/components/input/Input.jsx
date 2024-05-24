@@ -16,7 +16,8 @@ const Input = React.forwardRef(function Input(
             type === "file"
               ? "block relative text-[var(--black)] w-full text-center border-dashed border-[3px] rounded-[5px]"
               : ""
-          }`}>
+          }`}
+        >
           {label} {type === "file" ? "Choose A Photo" : ""}
         </label>
       )}
