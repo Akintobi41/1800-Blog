@@ -30,6 +30,10 @@ function App() {
       .finally(() => setLoading(false));
   }, []);
 
+  useEffect(() => { 
+   !toggle ? document.body.style.overflow = 'auto' : document.body.style.overflow = 'hidden'
+  }, [toggle])
+  
   const deletePost = (post) => {
     appwriteService.deletePost(post?.$id).then((status) => {
       if (status) {
@@ -40,7 +44,7 @@ function App() {
       }
     });
   };
-   
+   console.log(toggle)
   const queryClient = new QueryClient();
 
 

@@ -3,12 +3,10 @@ import { useContext } from "react";
 import { MyContext } from "../../MyContext";
 
 function HamburgerMenu() {
-  const { toggle, setToggle } = useContext(MyContext);
+  const { setToggle } = useContext(MyContext);
 
   function menuToggle() {
     setToggle((prevToggle) => !prevToggle);
-
-      return !toggle ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'auto'
   }
   return (
     <>
