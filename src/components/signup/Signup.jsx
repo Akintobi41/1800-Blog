@@ -38,7 +38,7 @@ function Signup() {
   };
 
   return (
-    <div className="flex items-center justify-center px-6">
+    <div className="flex items-center justify-center px-4">
       <div className={`flex flex-col mx-auto w-full ml-[0rem]`}>
         <div className="mb-2 flex justify-center">
          

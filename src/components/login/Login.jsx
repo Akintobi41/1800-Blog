@@ -42,7 +42,7 @@ function Login() {
   }, []);
 
   return (
-    <div className="flex justify-center px-6 h-full">
+    <div className="flex justify-center px-4 h-full">
       <div className={`flex flex-col items-center mx-auto w-full`}>
         <div className="mb-2 flex justify-center">
          
@@ -81,7 +81,7 @@ function Login() {
             </Button>
           </div>
           <p className="mt-2 text-center text-base text-black/60 text-[.7rem]">
-            Don&apos;t have any account?&nbsp;
+            Don&apos;t have an account?&nbsp;
             <Link
               to="/signup"
               className="font-medium text-primary transition-all duration-200 hover:underline"

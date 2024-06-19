@@ -19,6 +19,7 @@ function Home({ authentication }) {
     queryKey: ["data"],
     queryFn: () => appwriteService.getPosts([]),
   });
+  
   const { setToggle } = useContext(MyContext);
   const posts = data?.documents;
   const authStatus = useSelector((state) => state.auth.status);

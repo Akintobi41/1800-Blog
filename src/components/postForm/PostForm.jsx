@@ -29,6 +29,8 @@ function PostForm({ post }) {
   const [caption, setCaption] = useState("");
   const editorRef = useRef(null);
 
+  console.oog(userData)
+
   async function submit(data) {
     setLoading(true);
     setDisabled(true);

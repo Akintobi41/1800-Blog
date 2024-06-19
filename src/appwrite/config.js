@@ -40,7 +40,6 @@ export class AuthService {
         collectionId,
         ID.unique(),
         {
-          // removed slug from here
           title,
           content,
           status,

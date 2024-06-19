@@ -11,9 +11,9 @@ function Login() {
   }, []);
 
   return (
-    <div className="w-full flex sticky top-0">
-      <BackgroundContainer h={"h-[690px]"} />
-      <div className="sm:w-[52%] w-full max-w-[900px] my-0 mx-auto">
+    <div className="w-full flex sticky top-0 mb-4 md:mb-0 min-h-[500px]">
+      <BackgroundContainer h={"h-[650px]"} type={'login'} />
+      <div className="md:w-[52%] w-full max-w-[900px] my-0 mx-auto">
         <LoginComponent />
       </div>
     </div>
