@@ -44,7 +44,6 @@ function App() {
       }
     });
   };
-   console.log(toggle)
   const queryClient = new QueryClient();
 
 
