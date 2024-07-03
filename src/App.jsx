@@ -67,9 +67,9 @@ function App() {
         )}
         {!loading && (
           <div
-            className={`  ${
+            className={`${
               toggle ? "h-screen" : ""
-            } flex flex-wrap bg-[#ffffff] min-h-screen relative`}
+            }flex w-full flex-col bg-[#ffffff] min-h-screen relative`}
           >
             <div className="w-full block h-full sm:min-h-[500px] md:min-h-[650px]">
               <Header /> 
