@@ -9,7 +9,6 @@ import LogoutBtn from "./LogoutBtn";
 
 function Header() {
   const authStatus = useSelector((state) => state.auth.status); // Check if the user is logged or not
-
   const navigate = useNavigate();
   const navItems = [
     {

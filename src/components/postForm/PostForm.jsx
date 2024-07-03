@@ -29,12 +29,10 @@ function PostForm({ post }) {
   const [caption, setCaption] = useState("");
   const editorRef = useRef(null);
 
-  console.oog(userData)
 
   async function submit(data) {
     setLoading(true);
     setDisabled(true);
-    document.body.style.opacity = '.3';
     document.body.style.pointerEvents = 'none'
 
     if (post) {
@@ -74,8 +72,8 @@ function PostForm({ post }) {
     }
     setLoading(false);
     setDisabled(false);
-    document.body.style.opacity = '1'
     document.body.style.pointerEvents = 'auto'
+    document.body.style.overflow = 'auto'
 
   }
 

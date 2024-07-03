@@ -13,8 +13,10 @@ import Container from "./../../components/container/Container";
 import PostCard from "./../../components/postCard/PostCard";
 import { sortData } from "./../../utils/sortData/sortData";
 import Discover from "../../components/discover/Discover";
+import { motion } from "framer-motion";
+import Button from "../../components/button/Button";
 
-function Home({ authentication }) {
+function Home() {
   const { data, isLoading } = useQuery({
     queryKey: ["data"],
     queryFn: () => appwriteService.getPosts([]),
@@ -33,6 +35,12 @@ function Home({ authentication }) {
   function handleMorePosts() {
     setNext(next + postPerSlide);
   }
+
+  const h1Variants = {
+    hidden: { opacity: 0, y: -50 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <>
       {isLoading ? (
@@ -59,14 +67,19 @@ function Home({ authentication }) {
                       </div>
                     ))}
                   {!posts ||
-                    (posts.length === 0 && (
-                      <p>
-                        Exciting post you would like to share,{" "}
-                        <Link to="/add-post" className="italic">
-                          {" "}
-                          let{`'`}s begin
-                        </Link>
-                      </p>
+                      (posts.length === 0 && (
+                      <motion.section
+                      initial="hidden"
+                      animate="visible"
+                      transition={{ duration: 0.8 }}
+                      variants={h1Variants}
+                        className="flex flex-col gap-8 min-h-[400px] max-w-[600px] mx-auto">
+                        <h1 className="font-semibold">Welcome to My Blog!</h1>
+                        <p>We're excited to have you here. Our blog is a space for sharing thoughts, stories, and experiences. We can't wait to hear from you!</p>
+                        <Link to='/add-post'>
+                        <Button className="italic">Share Your First Post</Button>
+                        </Link> 
+                      </motion.section>
                     ))}{" "}
                 </div>
               </Container>

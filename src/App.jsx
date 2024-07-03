@@ -15,7 +15,7 @@ import ScrollToTop from "./components/scroll/Scroll";
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const [toggle, setToggle] = useState(null);
+  const [toggle, setToggle] = useState(true);
   const [confirmed, setConfirmed] = useState({ value: "", status: false });
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
@@ -30,10 +30,14 @@ function App() {
       .finally(() => setLoading(false));
   }, []);
 
-  useEffect(() => { 
-   !toggle ? document.body.style.overflow = 'auto' : document.body.style.overflow = 'hidden'
-  }, [toggle])
-  
+
+  // console.log(toggle)
+  // useEffect(() => {
+  //   !toggle
+  //     ? (document.body.style.overflow = "auto")
+  //     : (document.body.style.overflow = "hidden");
+  // }, [toggle]);
+
   const deletePost = (post) => {
     appwriteService.deletePost(post?.$id).then((status) => {
       if (status) {
@@ -46,13 +50,12 @@ function App() {
   };
   const queryClient = new QueryClient();
 
-
   return (
     <QueryClientProvider client={queryClient}>
       <MyContext.Provider
         value={{ toggle, setToggle, confirmed, setConfirmed }}
       >
-        <ScrollToTop/>
+        <ScrollToTop />
         {confirmed.status && (
           <ConfirmDelete
             confirmed={confirmed}
@@ -69,8 +72,8 @@ function App() {
             } flex flex-wrap bg-[#ffffff] min-h-screen relative`}
           >
             <div className="w-full block h-full sm:min-h-[500px] md:min-h-[650px]">
-              <Header toggle={toggle} setToggle={setToggle} />
-              
+              <Header /> 
+
               <main
                 className={`bg-[#ffffff] ${
                   confirmed.status ? "opacity-[.05] -z-20" : "opacity-100 z-10"
@@ -78,7 +81,6 @@ function App() {
               >
                 <Outlet />
               </main>
-            
             </div>
             <div className="w-full block self-end relative bottom-0">
               <Footer />

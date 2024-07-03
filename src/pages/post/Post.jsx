@@ -51,7 +51,7 @@ function Post() {
           setCopy(true);
         })
         .catch((err) => {
-          console.log(err);
+          throw err;
         });
     }
     setCopy(false);
