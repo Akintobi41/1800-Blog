@@ -11,7 +11,7 @@ function HamburgerMenu() {
   return (
     <>
       <div
-        className="sm:hidden cursor-pointer relative z-[12]"
+        className="sm:hidden cursor-pointer relative z-[21]"
         onClick={() => menuToggle()}
       >
         {" "}

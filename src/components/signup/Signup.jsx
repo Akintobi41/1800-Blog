@@ -16,7 +16,6 @@ function Signup() {
   const { register, handleSubmit, formState } = useForm();
   const { errors } = formState;
   const { name } = errors;
-  // const [disabled, setDisabled] = useState(false);
   const [loading, setLoading] = useState(null);
 
   const create = async (data) => {

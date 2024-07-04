@@ -52,16 +52,16 @@ function Header() {
         <div className="w-full m-auto flex justify-center max-w-[2000px]">
           <nav className="flex items-center justify-between w-full">
             <div className="mr-4">
-              <Logo></Logo>
+              <Logo />
             </div>
             <div>
               <HamburgerMenu />
 
               <ul
-                className={`flex ml-auto items-center sm:items-baseline sm:p-0 ${
+                className={`flex ml-auto items-center sm:items-baseline sm:p-0  ${
                   !toggle
                     ? "sm:flex opacity-100 bg-red left-0"
-                    : "fixed flex bottom-0 top-0 bg-red pt-[5rem] left-0 z-10 bg-[var(--alt)] flex-col w-full sm:opacity-100"
+                    : "fixed flex bottom-0 top-0 bg-red pt-[5rem] z-20 left-0 bg-[var(--alt)] flex-col w-full sm:opacity-100"
                 } `}
                 ref={ref}
               >

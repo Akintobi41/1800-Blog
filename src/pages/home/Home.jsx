@@ -46,7 +46,7 @@ function Home() {
       {isLoading ? (
         <Loader />
       ) : (
-        <div>
+        <div className="w-full">
           {authStatus ? (
             <>
               {posts?.length > 0 && (
@@ -73,7 +73,7 @@ function Home() {
                       animate="visible"
                       transition={{ duration: 0.8 }}
                       variants={h1Variants}
-                        className="flex flex-col gap-8 min-h-[400px] max-w-[600px] mx-auto">
+                        className="w-full flex flex-col gap-8 min-h-[400px] max-w-[600px] justify-center">
                         <h1 className="font-semibold">Welcome to My Blog!</h1>
                         <p>We're excited to have you here. Our blog is a space for sharing thoughts, stories, and experiences. We can't wait to hear from you!</p>
                         <Link to='/add-post'>

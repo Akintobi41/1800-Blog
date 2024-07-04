@@ -30,13 +30,9 @@ function App() {
       .finally(() => setLoading(false));
   }, []);
 
-
-  // console.log(toggle)
-  // useEffect(() => {
-  //   !toggle
-  //     ? (document.body.style.overflow = "auto")
-  //     : (document.body.style.overflow = "hidden");
-  // }, [toggle]);
+  useEffect(() => { 
+      !toggle ? document.body.style.overflow='auto' : document.body.style.overflow='hidden'
+  },[toggle])
 
   const deletePost = (post) => {
     appwriteService.deletePost(post?.$id).then((status) => {
@@ -69,14 +65,14 @@ function App() {
           <div
             className={`${
               toggle ? "h-screen" : ""
-            }flex w-full flex-col bg-[#ffffff] min-h-screen relative`}
+            } flex w-full flex-col bg-[#ffffff] min-h-screen relative`}
           >
-            <div className="w-full block h-full sm:min-h-[500px] md:min-h-[650px]">
+            <div className="w-full flex-1 flex-col h-full sm:min-h-[500px] md:min-h-[650px]">
               <Header /> 
 
               <main
-                className={`bg-[#ffffff] ${
-                  confirmed.status ? "opacity-[.05] -z-20" : "opacity-100 z-10"
+                className={`w-full mx-auto max-w-[2000px] flex flex-1 bg-[#ffffff] ${
+                  confirmed.status ? "opacity-[.05] " : "opacity-100 z-10"
                 }`}
               >
                 <Outlet />

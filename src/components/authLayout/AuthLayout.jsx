@@ -30,7 +30,7 @@ function Protected({ children, authentication = true }) {
     <Loader />
   ) : (
     <>
-      <div className="sm:flex justify-between m-auto max-w-[2000px]">
+      <div className="w-full sm:flex justify-between max-w-[2000px]">
         {children}
       </div>
     </>
