@@ -67,7 +67,7 @@ function App() {
               toggle ? "h-screen" : ""
             } flex w-full flex-col bg-[#ffffff] min-h-screen relative`}
           >
-            <div className="w-full flex flex-1 flex-col h-full sm:min-h-[500px] md:min-h-[650px]">
+            <div className="w-full sm:flex flex-1 flex-col h-full sm:min-h-[500px] md:min-h-[650px]">
               <Header /> 
 
               <main
